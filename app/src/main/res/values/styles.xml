@@ -1,0 +1,149 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="attrColorPrimary">@color/colorPrimary</item>
+        <item name="attrColorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="attrColorPrimaryLight">@color/colorPrimaryLight</item>
+        <item name="attrColorAccent">@color/colorAccent</item>
+        <item name="attrColorAccentDark">@color/colorAccentDark</item>
+        <item name="attrColorAccentLight">@color/colorAccentLight</item>
+        <item name="attrColorGroupBackground">@android:color/white</item>
+        <item name="attrColorGroupBorder">@color/colorPrimaryDark</item>
+        <item name="attrColorFondBouton">@color/colorAccent</item>
+        <item name="attrColorFondBoutonPresse">@color/colorAccentLight</item>
+        <item name="attrColorBordBouton">@android:color/white</item>
+        <item name="attrColorImageBouton">@android:color/white</item>
+        <item name="attrColorFondToggleOff">@color/colorPrimary</item>
+        <item name="attrColorFondToggleOn">@color/colorAccent</item>
+        <item name="attrColorBorderToggleOff">@android:color/transparent</item>
+        <item name="attrColorBorderToggleOn">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme1" parent="AppTheme.NoActionBar">
+        <item name="attrColorPrimary">@color/colorPrimary1</item>
+        <item name="attrColorPrimaryDark">@color/colorPrimaryDark1</item>
+        <item name="attrColorPrimaryLight">@color/colorPrimaryLight1</item>
+        <item name="attrColorAccent">@color/colorAccent1</item>
+        <item name="attrColorAccentDark">@color/colorAccentDark1</item>
+        <item name="attrColorAccentLight">@color/colorAccentLight1</item>
+        <item name="attrColorGroupBackground">@android:color/white</item>
+        <item name="attrColorGroupBorder">@color/colorPrimaryDark1</item>
+        <item name="attrColorFondBouton">@color/colorAccent1</item>
+        <item name="attrColorFondBoutonPresse">@color/colorAccentLight1</item>
+        <item name="attrColorBordBouton">@android:color/white</item>
+        <item name="attrColorImageBouton">@android:color/white</item>
+        <item name="attrColorFondToggleOff">@color/colorPrimary1</item>
+        <item name="attrColorFondToggleOn">@color/colorAccent1</item>
+        <item name="attrColorBorderToggleOff">@android:color/transparent</item>
+        <item name="attrColorBorderToggleOn">@android:color/transparent</item>
+  </style>
+
+    <style name="Theme2" parent="AppTheme.NoActionBar">
+        <item name="attrColorPrimary">@color/colorPrimary2</item>
+        <item name="attrColorPrimaryDark">@color/colorPrimaryDark2</item>
+        <item name="attrColorPrimaryLight">@color/colorPrimaryLight2</item>
+        <item name="attrColorAccent">@color/colorAccent2</item>
+        <item name="attrColorAccentDark">@color/colorAccentDark2</item>
+        <item name="attrColorAccentLight">@color/colorAccentLight2</item>
+        <item name="attrColorGroupBackground">@android:color/white</item>
+        <item name="attrColorGroupBorder">@color/colorPrimaryDark2</item>
+        <item name="attrColorFondBouton">@color/colorAccent2</item>
+        <item name="attrColorFondBoutonPresse">@color/colorAccentLight2</item>
+        <item name="attrColorBordBouton">@android:color/white</item>
+        <item name="attrColorImageBouton">@android:color/white</item>
+        <item name="attrColorFondToggleOff">@color/colorPrimary2</item>
+        <item name="attrColorFondToggleOn">@color/colorAccent2</item>
+        <item name="attrColorBorderToggleOff">@android:color/transparent</item>
+        <item name="attrColorBorderToggleOn">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme3" parent="AppTheme.NoActionBar">
+        <item name="attrColorPrimary">@color/colorPrimary3</item>
+        <item name="attrColorPrimaryDark">@color/colorPrimaryDark3</item>
+        <item name="attrColorPrimaryLight">@color/colorPrimaryLight3</item>
+        <item name="attrColorAccent">@color/colorAccent3</item>
+        <item name="attrColorAccentDark">@color/colorAccentDark3</item>
+        <item name="attrColorAccentLight">@color/colorAccentLight3</item>
+        <item name="attrColorGroupBackground">@android:color/white</item>
+        <item name="attrColorGroupBorder">@color/colorPrimaryDark3</item>
+        <item name="attrColorFondBouton">@color/colorAccent3</item>
+        <item name="attrColorFondBoutonPresse">@color/colorAccentLight3</item>
+        <item name="attrColorBordBouton">@android:color/white</item>
+        <item name="attrColorImageBouton">@android:color/white</item>
+        <item name="attrColorFondToggleOff">@color/colorPrimary3</item>
+        <item name="attrColorFondToggleOn">@color/colorAccent3</item>
+        <item name="attrColorBorderToggleOff">@android:color/transparent</item>
+        <item name="attrColorBorderToggleOn">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme4" parent="AppTheme.NoActionBar">
+        <item name="attrColorPrimary">@color/colorPrimary4</item>
+        <item name="attrColorPrimaryDark">@color/colorPrimaryDark4</item>
+        <item name="attrColorPrimaryLight">@color/colorPrimaryLight4</item>
+        <item name="attrColorAccent">@color/colorAccent4</item>
+        <item name="attrColorAccentDark">@color/colorAccentDark4</item>
+        <item name="attrColorAccentLight">@color/colorAccentLight4</item>
+        <item name="attrColorGroupBackground">@android:color/white</item>
+        <item name="attrColorGroupBorder">@color/colorPrimaryDark4</item>
+        <item name="attrColorFondBouton">@color/colorAccent4</item>
+        <item name="attrColorFondBoutonPresse">@color/colorAccentLight4</item>
+        <item name="attrColorBordBouton">@android:color/white</item>
+        <item name="attrColorImageBouton">@android:color/white</item>
+        <item name="attrColorFondToggleOff">@color/colorPrimary4</item>
+        <item name="attrColorFondToggleOn">@color/colorAccent4</item>
+        <item name="attrColorBorderToggleOff">@android:color/transparent</item>
+        <item name="attrColorBorderToggleOn">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme5" parent="AppTheme.NoActionBar">
+        <item name="attrColorPrimary">@color/colorPrimary5</item>
+        <item name="attrColorPrimaryDark">@color/colorPrimaryDark5</item>
+        <item name="attrColorPrimaryLight">@color/colorPrimaryLight5</item>
+        <item name="attrColorAccent">@color/colorAccent5</item>
+        <item name="attrColorAccentDark">@color/colorAccentDark5</item>
+        <item name="attrColorAccentLight">@color/colorAccentLight5</item>
+        <item name="attrColorGroupBackground">@android:color/white</item>
+        <item name="attrColorGroupBorder">@color/colorPrimaryDark5</item>
+        <item name="attrColorFondBouton">@color/colorAccent5</item>
+        <item name="attrColorFondBoutonPresse">@color/colorAccentLight5</item>
+        <item name="attrColorBordBouton">@android:color/white</item>
+        <item name="attrColorImageBouton">@android:color/white</item>
+        <item name="attrColorFondToggleOff">@color/colorPrimary5</item>
+        <item name="attrColorFondToggleOn">@color/colorAccent5</item>
+        <item name="attrColorBorderToggleOff">@android:color/transparent</item>
+        <item name="attrColorBorderToggleOn">@android:color/transparent</item>
+
+    </style>
+
+    <style name="Theme6" parent="AppTheme.NoActionBar">
+        <item name="attrColorPrimary">@color/colorPrimary6</item>
+        <item name="attrColorPrimaryDark">@color/colorPrimaryDark6</item>
+        <item name="attrColorPrimaryLight">@color/colorPrimaryLight6</item>
+        <item name="attrColorAccent">@color/colorAccent6</item>
+        <item name="attrColorAccentDark">@color/colorAccentDark6</item>
+        <item name="attrColorAccentLight">@color/colorAccentLight6</item>
+        <item name="attrColorGroupBackground">@android:color/white</item>
+        <item name="attrColorGroupBorder">@color/colorPrimaryDark6</item>
+        <item name="attrColorFondBouton">@color/colorAccent6</item>
+        <item name="attrColorFondBoutonPresse">@color/colorAccentLight6</item>
+        <item name="attrColorBordBouton">@android:color/white</item>
+        <item name="attrColorImageBouton">@android:color/white</item>
+        <item name="attrColorFondToggleOff">@color/colorPrimary6</item>
+        <item name="attrColorFondToggleOn">@color/colorAccent6</item>
+        <item name="attrColorBorderToggleOff">@android:color/transparent</item>
+        <item name="attrColorBorderToggleOn">@android:color/transparent</item>
+
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>

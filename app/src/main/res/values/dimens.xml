@@ -1,0 +1,12 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="marge_deuxieme_niveau">32dp</dimen>
+    <dimen name="marge_fin_deuxieme_niveau">8dp</dimen>
+    <dimen name="marge_switch_premier_niveau">8dp</dimen>
+    <dimen name="coins_toggle">96dp</dimen>
+    <dimen name="marge_categories">8dp</dimen>
+    <dimen name="coins_bouton_marche_arret">128dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="hauteur_bouton_startstop">128dp</dimen>
+
+</resources>

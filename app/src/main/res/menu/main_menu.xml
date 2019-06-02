@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Paramètres de l'application" android:id="@+id/menu_parametres"/>
+    <item android:title="Couleurs" android:id="@+id/menu_couleurs"/>
+    <item
+        android:id="@+id/menu_synthese_vocale"
+        android:title="Paramètres synthèse vocale" />
+    <item
+        android:id="@+id/menu_apropos"
+        android:title="A propos..." />
+    <item android:title="Traces" android:id="@+id/menu_traces"/>
+</menu>

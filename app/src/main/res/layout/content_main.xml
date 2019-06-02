@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_height="match_parent" android:layout_width="match_parent"
+
+              android:orientation="vertical" android:background="@drawable/fond_ecran"
+              android:padding="8dp" android:layout_marginTop="56dp">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:gravity="center">
+        <ImageButton
+                android:id="@+id/imageButtonStart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/hauteur_bouton_startstop"
+                android:layout_margin="8dp"
+                android:background="@drawable/fond_bouton"
+                android:onClick="onClickStart"
+                android:scaleType="fitCenter"
+                android:soundEffectsEnabled="true"
+                android:tint="?attr/attrColorImageBouton"
+                app:srcCompat="@drawable/ic_start"/>
+        <ImageButton
+                android:id="@+id/imageButtonStop"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/hauteur_bouton_startstop"
+                android:layout_margin="8dp"
+                android:background="@drawable/fond_bouton"
+                android:onClick="onClickStop"
+                android:scaleType="fitCenter"
+                android:tint="?attr/attrColorImageBouton"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_stop"/>
+        <TextView
+                android:id="@+id/textViewStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:text="@string/compagnon_arrete"
+                android:textColor="@color/couleurTexteRadioBoutons" android:textAlignment="center"/>
+    </LinearLayout>
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" android:gravity="start" android:layout_gravity="center_vertical">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/fond_group"
+                    android:orientation="vertical"
+                    android:padding="8dp" android:id="@+id/linearLayout">
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Annoncer l'heure:"/>
+
+                <RadioGroup
+                        android:id="@+id/radiogroupAnnonceHeure"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                    <RadioButton
+                            android:id="@+id/radioButtonAnnonceJamais"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_selector_gauche"
+                            android:button="@android:color/transparent"
+                            android:checked="true"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:text="Jamais"
+                            android:textColor="@color/couleurTexteRadioBoutons"/>
+
+                    <RadioButton
+                            android:id="@+id/radioButtonAnnonceHeure"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_selector"
+                            android:button="@android:color/transparent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:text="Heures"
+                            android:textColor="@color/couleurTexteRadioBoutons"/>
+
+                    <RadioButton
+                            android:id="@+id/radioButtonAnnonceDemi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_selector"
+                            android:button="@android:color/transparent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:text="Demi"
+                            android:textColor="@color/couleurTexteRadioBoutons"/>
+
+                    <RadioButton
+                            android:id="@+id/radioButtonAnnonceQuart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_selector_droite"
+                            android:button="@android:color/transparent"
+                            android:checked="true"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:text="Quart"
+                            android:textColor="@color/couleurTexteRadioBoutons"/>
+
+                </RadioGroup>
+
+                <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marge_categories"
+                        android:text="Conseiller une pause:"/>
+
+                <RadioGroup
+                        android:id="@+id/radiogroupConseilPause"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                    <RadioButton
+                            android:id="@+id/radioButtonPauseJamais"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_selector_gauche"
+                            android:button="@android:color/transparent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:text="Jamais"
+                            android:textColor="@color/couleurTexteRadioBoutons"/>
+
+                    <RadioButton
+                            android:id="@+id/radioButtonPause2Heures"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_selector"
+                            android:button="@android:color/transparent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:text="2 heures"
+                            android:textColor="@color/couleurTexteRadioBoutons"/>
+
+                    <RadioButton
+                            android:id="@+id/radioButtonPause1Heure"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_selector"
+                            android:button="@android:color/transparent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:text="1 heure"
+                            android:textColor="@color/couleurTexteRadioBoutons"/>
+
+                    <RadioButton
+                            android:id="@+id/radioButtonPauseDemiHeure"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_selector_droite"
+                            android:button="@android:color/transparent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:text="30 min"
+                            android:textColor="@color/couleurTexteRadioBoutons"/>
+
+                </RadioGroup>
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/fond_group"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Lire les SMS entrants"/>
+
+                <RadioGroup
+                        android:id="@+id/radiogroupLireSMS"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                    <RadioButton
+                            android:id="@+id/radioButtonSMSJamais"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_selector_gauche"
+                            android:button="@android:color/transparent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:text="Jamais"
+                            android:textColor="@color/couleurTexteRadioBoutons"/>
+
+                    <RadioButton
+                            android:id="@+id/radioButtonSMSToujours"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_selector"
+                            android:button="@android:color/transparent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:text="Toujours"
+                            android:textColor="@color/couleurTexteRadioBoutons"/>
+
+                    <RadioButton
+                            android:id="@+id/radioButtonSMSContacts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_selector_droite"
+                            android:button="@android:color/transparent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:text="Contacts seulement"
+                            android:textColor="@color/couleurTexteRadioBoutons"/>
+
+                </RadioGroup>
+
+                <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marge_categories"
+                        android:text="Répondre aux SMS entrants:"/>
+
+                <RadioGroup
+                        android:id="@+id/radiogroupRepondreSMS"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                    <RadioButton
+                            android:id="@+id/radioButtonSMSRepondreJamais"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_selector_gauche"
+                            android:button="@android:color/transparent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:text="Jamais"
+                            android:textColor="@color/couleurTexteRadioBoutons"/>
+
+                    <RadioButton
+                            android:id="@+id/radioButtonSMSRepondreToujours"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_selector"
+                            android:button="@android:color/transparent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:text="Toujours"
+                            android:textColor="@color/couleurTexteRadioBoutons"/>
+
+                    <RadioButton
+                            android:id="@+id/radioButtonSMSRepondreContacts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_selector_droite"
+                            android:button="@android:color/transparent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:text="Contacts seulement"
+                            android:textColor="@color/couleurTexteRadioBoutons"/>
+
+                    <ImageButton
+                            android:id="@+id/imageButtonReponseSMS"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:tint="@color/colorPrimaryDark"
+                            app:srcCompat="@drawable/ic_dots_horizontal"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/fond_group"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Annoncer les appels entrants:"/>
+
+                <RadioGroup
+                        android:id="@+id/radiogroupAnnoncerAppels"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                    <RadioButton
+                            android:id="@+id/radioAnnoncerAppelsJamais"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_selector_gauche"
+                            android:button="@android:color/transparent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:text="Jamais"
+                            android:textColor="@color/couleurTexteRadioBoutons"/>
+
+                    <RadioButton
+                            android:id="@+id/radioAnnoncerAppelsToujours"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_selector"
+                            android:button="@android:color/transparent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:text="Toujours"
+                            android:textColor="@color/couleurTexteRadioBoutons"/>
+
+                    <RadioButton
+                            android:id="@+id/radioAnnoncerAppelsContacts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_selector_droite"
+                            android:button="@android:color/transparent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:text="Contacts seulement"
+                            android:textColor="@color/couleurTexteRadioBoutons"/>
+
+                </RadioGroup>
+
+                <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marge_categories"
+                        android:text="Répondre aux appels entrants:"/>
+
+                <RadioGroup
+                        android:id="@+id/radiogroupRepondreAppels"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                    <RadioButton
+                            android:id="@+id/radioButtonAppelsJamais"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_selector_gauche"
+                            android:button="@android:color/transparent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:text="Jamais"
+                            android:textColor="@color/couleurTexteRadioBoutons"/>
+
+                    <RadioButton
+                            android:id="@+id/radioButtonAppelsToujours"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_selector"
+                            android:button="@android:color/transparent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:text="Toujours"
+                            android:textColor="@color/couleurTexteRadioBoutons"/>
+
+                    <RadioButton
+                            android:id="@+id/radioButtonAppelsContacts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_selector_droite"
+                            android:button="@android:color/transparent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:text="Contacts seulement"
+                            android:textColor="@color/couleurTexteRadioBoutons"/>
+
+                    <ImageButton
+                            android:id="@+id/imageButtonReponseAppels"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:tint="@color/colorPrimaryDark"
+                            app:srcCompat="@drawable/ic_dots_horizontal"/>
+
+                </RadioGroup>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

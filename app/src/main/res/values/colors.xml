@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#42A5F5</color>
+    <color name="colorPrimaryDark">#0277BD</color>
+    <color name="colorPrimaryLight">#BBDEFB</color>
+    <color name="colorAccent">#FF7043</color>
+    <color name="colorAccentDark">#BF360C</color>
+    <color name="colorAccentLight">#FFCCBC</color>
+    <color name="couleurTexteRadioBoutons">#FFFFFF</color>-->
+    <color name="colorPrimary">#1e88e5</color>
+    <color name="colorPrimaryDark">#0e3e69</color>
+    <color name="colorPrimaryLight">#6fb3ee</color>
+    <color name="colorAccent">#E4572E</color>
+    <color name="colorAccentDark">#532011</color>
+    <color name="colorAccentLight">#ed947a</color>
+    <color name="couleurTexteRadioBoutons">#FFFFFF</color>
+    <color name="colorFondToggleOff">@color/colorPrimary</color>
+    <color name="colorFondToggleOn">@color/colorAccent</color>
+    <color name="colorFondEcran">@color/colorPrimaryDark</color>
+    <color name="colorBorderToggleOff">@android:color/white</color>
+    <color name="colorBorderToggleOn">@color/colorAccent</color>
+
+
+    <color name="colorPrimary1">#ffc107</color>
+    <color name="colorPrimaryDark1">#ff8f00</color>
+    <color name="colorPrimaryLight1">#ffe082</color>
+    <color name="colorAccent1">#cddc39</color>
+    <color name="colorAccentDark1">#9e9d24</color>
+    <color name="colorAccentLight1">#e6ee9c</color>
+    <color name="couleurTexteRadioBoutons1">#FFFFFF</color>
+    <color name="colorFondToggleOff1">@color/colorPrimary1</color>
+    <color name="colorFondToggleOn1">@color/colorAccent1</color>
+    <color name="colorFondEcran1">@color/colorPrimaryDark1</color>
+    <color name="colorBorderToggleOff1">#fff</color>
+    <color name="colorBorderToggleOn1">@color/colorAccent1</color>
+
+
+    <color name="colorPrimary2">#1e88e5</color>
+    <color name="colorPrimaryDark2">#0e3e69</color>
+    <color name="colorPrimaryLight2">#6fb3ee</color>
+    <color name="colorAccent2">#E4572E</color>
+    <color name="colorAccentDark2">#532011</color>
+    <color name="colorAccentLight2">#ed947a</color>
+    <color name="couleurTexteRadioBoutons2">#FFFFFF</color>
+    <color name="colorFondToggleOff2">@color/colorPrimary</color>
+    <color name="colorFondToggleOn2">@color/colorAccent</color>
+    <color name="colorFondEcran2">@color/colorPrimaryDark</color>
+    <color name="colorBorderToggleOff2">@android:color/white</color>
+    <color name="colorBorderToggleOn2">@color/colorAccent</color>
+
+
+    <color name="colorPrimary3">#009688</color>
+    <color name="colorPrimaryDark3">#00695c</color>
+    <color name="colorPrimaryLight3">#80cbc4</color>
+    <color name="colorAccent3">#8bc34a</color>
+    <color name="colorAccentDark3">#558b2f</color>
+    <color name="colorAccentLight3">#c5e1a5</color>
+    <color name="couleurTexteRadioBoutons3">#FFFFFF</color>
+    <color name="colorFondToggleOff3">@color/colorPrimary3</color>
+    <color name="colorFondToggleOn3">@color/colorAccent3</color>
+    <color name="colorFondEcran3">@color/colorPrimaryDark3</color>
+    <color name="colorBorderToggleOff3">#fff</color>
+    <color name="colorBorderToggleOn3">@color/colorAccent3</color>
+
+
+    <color name="colorPrimary4">#ff5722</color>
+    <color name="colorPrimaryDark4">#d84315</color>
+    <color name="colorPrimaryLight4">#ffab91</color>
+    <color name="colorAccent4">#ffc107</color>
+    <color name="colorAccentDark4">#ff8f00</color>
+    <color name="colorAccentLight4">#ffe082</color>
+    <color name="couleurTexteRadioBoutons4">#FFFFFF</color>
+    <color name="colorFondToggleOff4">@color/colorPrimary4</color>
+    <color name="colorFondToggleOn4">@color/colorAccent4</color>
+    <color name="colorFondEcran4">@color/colorPrimaryDark4</color>
+    <color name="colorBorderToggleOff4">#fff</color>
+    <color name="colorBorderToggleOn4">@color/colorAccent4</color>
+
+
+    <color name="colorPrimary5">#607d8b</color>
+    <color name="colorPrimaryDark5">#37474f</color>
+    <color name="colorPrimaryLight5">#b0bec5</color>
+    <color name="colorAccent5">#795548</color>
+    <color name="colorAccentDark5">#4e342e</color>
+    <color name="colorAccentLight5">#bcaaa4</color>
+    <color name="couleurTexteRadioBoutons5">#FFF</color>
+    <color name="colorFondToggleOff5">@color/colorPrimary5</color>
+    <color name="colorFondToggleOn5">@color/colorAccent5</color>
+    <color name="colorFondEcran5">@color/colorPrimaryDark5</color>
+    <color name="colorBorderToggleOff5">#FFF</color>
+    <color name="colorBorderToggleOn5">@color/colorAccent5</color>
+
+
+    <color name="colorPrimary6">#3f51b5</color>
+    <color name="colorPrimaryDark6">#283593</color>
+    <color name="colorPrimaryLight6">#9fa8da</color>
+    <color name="colorAccent6">#9c27b0</color>
+    <color name="colorAccentDark6">#6a1b9a</color>
+    <color name="colorAccentLight6">#ce93d8</color>
+    <color name="couleurTexteRadioBoutons6">#FFFFFF</color>
+    <color name="colorFondToggleOff6">@color/colorPrimary6</color>
+    <color name="colorFondToggleOn6">@color/colorAccent6</color>
+    <color name="colorFondEcran6">@color/colorPrimaryDark6</color>
+    <color name="colorBorderToggleOff6">#FFF</color>
+    <color name="colorBorderToggleOn6">@color/colorAccent6</color>
+</resources>

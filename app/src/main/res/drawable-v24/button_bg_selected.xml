@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/coins_bouton_marche_arret"/>
+            <solid android:color="?attr/attrColorFondBouton"/>
+            <stroke android:width="2dp" android:color="?attr/attrColorBordBouton"/>
+        </shape>
+    </item>
+</selector>

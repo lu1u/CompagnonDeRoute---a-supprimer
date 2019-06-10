@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 
 public class BatteryChangeReceiver extends BroadcastReceiver
 {
-	CompagnonService service ;
+	final CompagnonService service ;
 	public BatteryChangeReceiver( CompagnonService s)
 	{
 		super();
@@ -23,7 +23,6 @@ public class BatteryChangeReceiver extends BroadcastReceiver
 	@Override
 	public void onReceive(Context context, @NonNull Intent intent)
 	{
-		//Log.debug( "BatteryChangeReceiver:" +  intent.getAction()) ;
 		String action = intent.getAction();
 		if (Intent.ACTION_BATTERY_CHANGED.equals(action))
 		{

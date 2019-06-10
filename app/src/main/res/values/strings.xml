@@ -6,8 +6,9 @@
     <string name="lowbattery">Batterie faible %1$d %%</string>
     <string name="format_nouveau_sms">Nouveau SMS reçu de %1$s. Contenu du sms: %2$s"</string>
     <string name="format_appel_telephonique">Appel téléphonique de %1$s</string>
-    <string name="compagnon_arrete">Cliquez sur le bouton pour lancer Compagnon de route</string>
+    <string name="compagnon_arrete">Cliquez sur le bouton pour lancer\nCompagnon de route</string>
     <string name="volume">Volume %1$d</string>
     <string name="volume_du_systeme">Volume par défaut du système</string>
-
+    <string name="conseille_pause">Il est %1$s, il est temps de faire une pause</string>
+    <string name="annonce_heure">Il est %1$s</string>
 </resources>

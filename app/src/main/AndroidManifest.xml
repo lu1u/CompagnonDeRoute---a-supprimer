@@ -11,27 +11,25 @@
     <uses-permission android:name="android.permission.PHONE_STATE"/>
     <uses-permission android:name="android.permission.PROCESS_INCOMING_CALLS"/>
     <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
             android:allowBackup="true"
-            android:icon="@drawable/ic_compagnon"
+            android:icon="@drawable/ic_launcher"
             android:label="@string/app_name"
-            android:roundIcon="@drawable/ic_compagnon"
+            android:roundIcon="@drawable/ic_launcher"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <service
+                android:name=".textToSpeech.TextToSpeechIntentService"
+                android:exported="false">
+        </service>
+
         <activity android:name=".ThemeActivity">
         </activity>
         <activity android:name=".ParametresActivity">
         </activity>
-        <activity
-                android:name=".VoiceStartActivity"
-                android:label="Test Compagnon">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-            </intent-filter>
-        </activity>
-        <activity android:name=".textToSpeech.TextToSpeechActivity"/>
 
         <receiver
                 android:name=".service.phone.IncomingCallReceiver"
@@ -62,15 +60,16 @@
 
         <activity
                 android:name=".MainActivity"
+                android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
                 android:label="@string/app_name"
-                android:screenOrientation="portrait">
+                android:screenOrientation="portrait"
+                android:supportsPictureInPicture="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

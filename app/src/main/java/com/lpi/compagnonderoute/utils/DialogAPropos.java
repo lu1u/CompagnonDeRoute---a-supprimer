@@ -1,17 +1,10 @@
 package com.lpi.compagnonderoute.utils;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-
 import com.lpi.compagnonderoute.BuildConfig;
 import com.lpi.compagnonderoute.R;
 

@@ -33,14 +33,13 @@ public class Plannificateur
     private static Plannificateur INSTANCE = null;
 
 
-    private AlarmManager _alarmManager;
+    final private AlarmManager _alarmManager;
     private PendingIntent _pendingIntent;
 
     /**
      * Point d'accès pour l'instance unique du singleton
      */
-    @Nullable
-    public static synchronized Plannificateur getInstance(@NonNull Context context)
+    @NonNull public static synchronized Plannificateur getInstance(@NonNull Context context)
     {
         if (INSTANCE == null)
         {
@@ -182,7 +181,7 @@ public class Plannificateur
             Calendar pause = Pause.getProchaineNotification(maintenant, preferences);
             if (pause != null)
             {
-                messageUI += "Prochaine pause " + Carillon.toHourString(context, pause) + "\n";
+                messageUI += "Prochaine pause " + Carillon.toHourString(context, pause) ;
 
                 if (prochaineNotification == null || pause.before(prochaineNotification))
                 {

@@ -1,3 +1,6 @@
+/***
+ * Recepteur des alarmes Carillon ou Pause
+ */
 package com.lpi.compagnonderoute.plannificateur;
 
 import android.content.BroadcastReceiver;
@@ -5,9 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.text.format.DateUtils;
-import android.util.Log;
-
-
+import com.lpi.compagnonderoute.R;
 import com.lpi.compagnonderoute.textToSpeech.TextToSpeechManager;
 import com.lpi.compagnonderoute.utils.Preferences;
 import com.lpi.reportlibrary.Report;
@@ -16,8 +17,6 @@ import java.util.Calendar;
 
 public class AlarmReceiver extends BroadcastReceiver
 {
-	public static final String TAG = AlarmReceiver.class.getName();
-
 	/***
 	 * Reception d'une alarme
 	 * @param context
@@ -31,6 +30,7 @@ public class AlarmReceiver extends BroadcastReceiver
 		{
 			String action = intent.getAction();
 			r.log( Report.NIVEAU.DEBUG, "Alarme recue, action=" + action);
+
 			if (Plannificateur.ACTION_ALARME.equals(action))
 			{
 				int type = intent.getIntExtra(Plannificateur.EXTRA_TYPE_NOTIFICATION, Plannificateur.TYPE_NOTIFICATION_CARILLON);
@@ -43,6 +43,8 @@ public class AlarmReceiver extends BroadcastReceiver
 					case Plannificateur.TYPE_NOTIFICATION_PAUSE:
 						annoncePause(context);
 						break;
+					default:
+						r.log(Report.NIVEAU.WARNING, "Type inconnu " + type);
 				}
 			}
 		} catch (Exception e)
@@ -63,8 +65,7 @@ public class AlarmReceiver extends BroadcastReceiver
 		if ( prefs.isConseillerPause())
 		{
 			Calendar maintenant = Calendar.getInstance();
-			String message = "Il est " + toHourString(context, maintenant) + ", il est temps de faire une pause";
-			TextToSpeechManager.getInstance(context).annonceFromReceiver(message);
+			TextToSpeechManager.getInstance(context).annonceFromReceiver(context, R.string.conseille_pause,  DateUtils.formatDateTime(context, maintenant.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME));
 
 			prefs.setHeureDernierePause(maintenant.getTimeInMillis());
 			prefs.flush(context);
@@ -73,10 +74,6 @@ public class AlarmReceiver extends BroadcastReceiver
 		}
 	}
 
-	private String toHourString(Context context, Calendar c)
-	{
-		return DateUtils.formatDateTime(context, c.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
-	}
 
 	/***
 	 * Annonce l'heure
@@ -88,8 +85,7 @@ public class AlarmReceiver extends BroadcastReceiver
 		if ( preferences.isEnCours() && (preferences.getDelaiAnnonceHeure()!= Preferences.ANNONCER_HEURE.JAMAIS))
 		{
 			Calendar maintenant = Calendar.getInstance();
-			String message = "Il est " + toHourString(context, maintenant);
-			TextToSpeechManager.getInstance(context).annonceFromReceiver(message);
+			TextToSpeechManager.getInstance(context).annonceFromReceiver(context, R.string.annonce_heure, DateUtils.formatDateTime(context, maintenant.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME));
 			Plannificateur.getInstance(context).plannifieProchaineNotification(context);
 		}
 	}

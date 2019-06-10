@@ -7,18 +7,18 @@
     <color name="colorAccentDark">#BF360C</color>
     <color name="colorAccentLight">#FFCCBC</color>
     <color name="couleurTexteRadioBoutons">#FFFFFF</color>-->
-    <color name="colorPrimary">#1e88e5</color>
-    <color name="colorPrimaryDark">#0e3e69</color>
-    <color name="colorPrimaryLight">#6fb3ee</color>
-    <color name="colorAccent">#E4572E</color>
-    <color name="colorAccentDark">#532011</color>
-    <color name="colorAccentLight">#ed947a</color>
-    <color name="couleurTexteRadioBoutons">#FFFFFF</color>
-    <color name="colorFondToggleOff">@color/colorPrimary</color>
-    <color name="colorFondToggleOn">@color/colorAccent</color>
-    <color name="colorFondEcran">@color/colorPrimaryDark</color>
-    <color name="colorBorderToggleOff">@android:color/white</color>
-    <color name="colorBorderToggleOn">@color/colorAccent</color>
+    <!-- <color name="colorPrimary">#1e88e5</color>-->
+    <!-- <color name="colorPrimaryDark">#0e3e69</color>-->
+    <!-- <color name="colorPrimaryLight">#6fb3ee</color>-->
+    <!-- <color name="colorAccent">#E4572E</color>-->
+    <!-- <color name="colorAccentDark">#532011</color>-->
+    <!-- <color name="colorAccentLight">#ed947a</color>-->
+    <!-- <color name="couleurTexteRadioBoutons">#FFFFFF</color>-->
+    <!-- <color name="colorFondToggleOff">@color/colorPrimary</color>-->
+    <!-- <color name="colorFondToggleOn">@color/colorAccent</color>-->
+    <!-- <color name="colorFondEcran">@color/colorPrimaryDark</color>-->
+    <!-- <color name="colorBorderToggleOff">@android:color/white</color>-->
+    <!-- <color name="colorBorderToggleOn">@color/colorAccent</color>-->
 
 
     <color name="colorPrimary1">#ffc107</color>

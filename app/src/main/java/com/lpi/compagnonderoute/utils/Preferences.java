@@ -35,7 +35,8 @@ public class Preferences
 		_dirty = true;
 	}
 
-	public boolean isForcerHautParleur() {
+	public boolean isForcerHautParleur()
+	{
 		return _forcerHautParleur;
 	}
 
@@ -78,7 +79,18 @@ public class Preferences
 		_dirty = true;
 	}
 
-    public enum ANNONCER_HEURE
+	public boolean isActiverModePip()
+	{
+		return _activerPip;
+	}
+
+	public void setActiverModePip(boolean v)
+	{
+		_activerPip = v;
+		_dirty = true;
+	}
+
+	public enum ANNONCER_HEURE
 	{
 		JAMAIS, TOUTES_LES_HEURES, TOUTES_LES_DEMI_HEURES, TOUS_LES_QUARTS_D_HEURES
 	}
@@ -90,24 +102,26 @@ public class Preferences
 
 	}
 
-	@Nullable private static Preferences INSTANCE = null;
-	@NonNull static private String PREFS_THEME = "theme"; //$NON-NLS-1$
-	@NonNull static private String PREFS_FORCER_HAUT_PARLEUR = "forcer haut parleur"; //$NON-NLS-1$
-	@NonNull static private String PREFS_VOLUME_DEFAUT = "volume defaut"; //$NON-NLS-1$
-	@NonNull static private String PREFS_VOLUME= "volume"; //$NON-NLS-1$
-	@NonNull static private String PREFS_EN_COURS = "en cours"; //$NON-NLS-1$
-	@NonNull static private String PREFS_HEURE_DERNIERE_PAUSE = "heure derniere pause"; //$NON-NLS-1$
-	@NonNull static private String PREFS_DERNIER_SMS = "dernier sms"; //$NON-NLS-1$
-	@NonNull static private String PREFS_ANNONCE_BATTERIE_FAIBLE = "annonce batterie faible"; //$NON-NLS-1$
-	@NonNull static private String PREFS_DELAI_ANNONCER_HEURE = "delai annoncer heure"; //$NON-NLS-1$
-	@NonNull static private String PREFS_CONSEILLER_PAUSE = "conseiller pause"; //$NON-NLS-1$
-	@NonNull static private String PREFS_MINUTES_ENTRE_PAUSES = "minutes entre pauses"; //$NON-NLS-1$
-	@NonNull static private String PREFS_LIRE_SMS = "lire sms"; //$NON-NLS-1$
-	@NonNull static private String PREFS_REPONDRE_SMS = "repondre sms"; //$NON-NLS-1$
-	@NonNull static private String PREFS_REPONSE_SMS = "reponse sms"; //$NON-NLS-1$
-	@NonNull static private String PREFS_REPONDRE_APPELS = "repondre appels"; //$NON-NLS-1$
-	@NonNull static private String PREFS_REPONSE_APPELS = "reponse appels"; //$NON-NLS-1$
-	@NonNull static private String PREFS_ANNONCER_APPELS = "annoncer appels"; //$NON-NLS-1$
+	@Nullable
+	private static Preferences INSTANCE = null;
+	@NonNull	static private final String PREFS_THEME = "theme"; //$NON-NLS-1$
+	@NonNull	static private final String PREFS_FORCER_HAUT_PARLEUR = "forcer haut parleur"; //$NON-NLS-1$
+	@NonNull	static private final String PREFS_ACTIVER_PICTURE_IN_PICTURE = "activer_pip"; //$NON-NLS-1$
+	@NonNull	static private final String PREFS_VOLUME_DEFAUT = "volume defaut"; //$NON-NLS-1$
+	@NonNull	static private final String PREFS_VOLUME = "volume"; //$NON-NLS-1$
+	@NonNull	static private final String PREFS_EN_COURS = "en cours"; //$NON-NLS-1$
+	@NonNull	static private final String PREFS_HEURE_DERNIERE_PAUSE = "heure derniere pause"; //$NON-NLS-1$
+	@NonNull	static private final String PREFS_DERNIER_SMS = "dernier sms"; //$NON-NLS-1$
+	@NonNull	static private final String PREFS_ANNONCE_BATTERIE_FAIBLE = "annonce batterie faible"; //$NON-NLS-1$
+	@NonNull	static private final String PREFS_DELAI_ANNONCER_HEURE = "delai annoncer heure"; //$NON-NLS-1$
+	@NonNull	static private final String PREFS_CONSEILLER_PAUSE = "conseiller pause"; //$NON-NLS-1$
+	@NonNull	static private final String PREFS_MINUTES_ENTRE_PAUSES = "minutes entre pauses"; //$NON-NLS-1$
+	@NonNull	static private final String PREFS_LIRE_SMS = "lire sms"; //$NON-NLS-1$
+	@NonNull	static private final String PREFS_REPONDRE_SMS = "repondre sms"; //$NON-NLS-1$
+	@NonNull	static private final String PREFS_REPONSE_SMS = "reponse sms"; //$NON-NLS-1$
+	@NonNull	static private final String PREFS_REPONDRE_APPELS = "repondre appels"; //$NON-NLS-1$
+	@NonNull	static private final String PREFS_REPONSE_APPELS = "reponse appels"; //$NON-NLS-1$
+	@NonNull	static private final String PREFS_ANNONCER_APPELS = "annoncer appels"; //$NON-NLS-1$
 
 	private boolean _dirty;
 	private int _theme = 1;
@@ -115,18 +129,19 @@ public class Preferences
 	private ANNONCER_HEURE _delaiAnnonceHeure = ANNONCER_HEURE.TOUS_LES_QUARTS_D_HEURES;
 	private boolean _conseillerPause = true;
 	private int _minutesEntrePauses = 60;
-	private ENTRANT _lireSMS = ENTRANT.TOUJOURS ;
+	private ENTRANT _lireSMS = ENTRANT.TOUJOURS;
 	private ENTRANT _repondreSMS = ENTRANT.SI_CONTACT;
 	private String _reponseSMS;
 	private ENTRANT _repondreAppels = ENTRANT.JAMAIS;
 	private ENTRANT _annoncerAppels = ENTRANT.TOUJOURS;
 	private String _reponseAppels;
 	private long _heureDernierePause = 0;
-	private long _dernierSMS = 0 ;
+	private long _dernierSMS = 0;
 	private boolean _annonceBatterieFaible = false;
 	private boolean _volumeDefaut = false;
 	private int _volume = 1;
-	private boolean _forcerHautParleur= false;
+	private boolean _forcerHautParleur = false;
+	private boolean _activerPip = false;
 
 	private Preferences(Context context)
 	{
@@ -138,7 +153,7 @@ public class Preferences
 		_delaiAnnonceHeure = toANNONCER_HEURE(settings.getInt(PREFS_DELAI_ANNONCER_HEURE, toInt(_delaiAnnonceHeure)));
 		_conseillerPause = settings.getBoolean(PREFS_CONSEILLER_PAUSE, _conseillerPause);
 		_minutesEntrePauses = settings.getInt(PREFS_MINUTES_ENTRE_PAUSES, _minutesEntrePauses);
-		_lireSMS = toENTRANT( settings.getInt(PREFS_LIRE_SMS, toInt(_lireSMS)));
+		_lireSMS = toENTRANT(settings.getInt(PREFS_LIRE_SMS, toInt(_lireSMS)));
 		_repondreSMS = toENTRANT(settings.getInt(PREFS_REPONDRE_SMS, toInt(_repondreSMS)));
 		_reponseSMS = settings.getString(PREFS_REPONSE_SMS, "Merci pour votre message. Je ne peux pas vous répondre actuellement.\nJe vous répondrai dès que possible");
 		_repondreAppels = toENTRANT(settings.getInt(PREFS_REPONDRE_APPELS, toInt(_repondreAppels)));
@@ -150,6 +165,7 @@ public class Preferences
 		_volumeDefaut = settings.getBoolean(PREFS_VOLUME_DEFAUT, _volumeDefaut);
 		_volume = settings.getInt(PREFS_VOLUME, _volume);
 		_forcerHautParleur = settings.getBoolean(PREFS_FORCER_HAUT_PARLEUR, _forcerHautParleur);
+		_activerPip = settings.getBoolean(PREFS_ACTIVER_PICTURE_IN_PICTURE, _activerPip);
 	}
 
 	/**
@@ -181,6 +197,7 @@ public class Preferences
 			editor.putBoolean(PREFS_FORCER_HAUT_PARLEUR, _forcerHautParleur);
 			editor.putBoolean(PREFS_VOLUME_DEFAUT, _volumeDefaut);
 			editor.putInt(PREFS_VOLUME, _volume);
+			editor.putBoolean(PREFS_ACTIVER_PICTURE_IN_PICTURE, _activerPip);
 			editor.apply();
 			_dirty = false;
 		}
@@ -190,8 +207,7 @@ public class Preferences
 	/**
 	 * Point d'accès pour l'instance unique du singleton
 	 */
-	@Nullable
-	public static synchronized Preferences getInstance(@NonNull Context context)
+	@NonNull public static synchronized Preferences getInstance(@NonNull Context context)
 	{
 		if (INSTANCE == null)
 		{
@@ -296,9 +312,12 @@ public class Preferences
 	{
 		switch (value)
 		{
-			case 1: return ENTRANT.TOUJOURS;
-			case 2: return ENTRANT.SI_CONTACT;
-			default: return ENTRANT.JAMAIS;
+			case 1:
+				return ENTRANT.TOUJOURS;
+			case 2:
+				return ENTRANT.SI_CONTACT;
+			default:
+				return ENTRANT.JAMAIS;
 		}
 	}
 
@@ -306,9 +325,12 @@ public class Preferences
 	{
 		switch (value)
 		{
-			case TOUJOURS:  return 1;
-			case SI_CONTACT: return 2;
-			default: return 0;
+			case TOUJOURS:
+				return 1;
+			case SI_CONTACT:
+				return 2;
+			default:
+				return 0;
 		}
 	}
 
@@ -365,7 +387,6 @@ public class Preferences
 		_heureDernierePause = heureDernierePause;
 		_dirty = true;
 	}
-
 
 
 }

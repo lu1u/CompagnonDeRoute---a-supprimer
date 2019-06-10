@@ -12,7 +12,7 @@ import android.telephony.SmsManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
-public class SMS
+public class SMSUtils
 {
 	public static void send(@NonNull final Context context, @NonNull final String adress, @NonNull final String message, int subscriptionId)
 	{
@@ -25,15 +25,15 @@ public class SMS
 					SubscriptionManager subscriptionManager = (context).getSystemService(SubscriptionManager.class);
 					SubscriptionInfo subscriptionInfo = subscriptionManager.getActiveSubscriptionInfo(subscriptionId);
 					SmsManager smsManager;
-					if ( subscriptionInfo == null)
+					if (subscriptionInfo == null)
 						smsManager = SmsManager.getDefault();
 					else
 						smsManager = SmsManager.getSmsManagerForSubscriptionId(subscriptionInfo.getSubscriptionId());
 
-					if (smsManager!=null)
+					if (smsManager != null)
 					{
-						PendingIntent i1 = PendingIntent.getBroadcast(context, 0,new Intent("sent"), 0);
-						PendingIntent i2 = PendingIntent.getBroadcast(context, 0,new Intent("received"), 0);
+						PendingIntent i1 = PendingIntent.getBroadcast(context, 0, new Intent("sent"), 0);
+						PendingIntent i2 = PendingIntent.getBroadcast(context, 0, new Intent("received"), 0);
 						smsManager.sendTextMessage(adress, null, message, i1, i2);
 					}
 				}

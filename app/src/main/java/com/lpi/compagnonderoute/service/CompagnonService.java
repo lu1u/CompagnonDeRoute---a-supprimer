@@ -12,7 +12,6 @@ import android.support.v4.app.ActivityCompat;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
-
 import com.lpi.compagnonderoute.service.phone.IncomingCallReceiver;
 import com.lpi.compagnonderoute.service.phone.SMSBroadcastReceiver;
 import com.lpi.compagnonderoute.utils.Preferences;
@@ -100,7 +99,7 @@ public class CompagnonService extends Service
 	{
 		Report.getInstance(this).log(Report.NIVEAU.DEBUG, "handleActionStop");
 
-		// Arreter reception SMS
+		// Arreter reception SMSUtils
 		if ( _smsBroadcastReceiver != null)
 		{
 			unregisterReceiver(_smsBroadcastReceiver);

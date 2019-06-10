@@ -4,8 +4,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.support.annotation.Nullable;
 
-public class Contact
+public class ContactUtils
 {
 	/**
 	 * Essaie de retrouver le nom d'un contact a partir de son numero de telephone
@@ -14,18 +15,22 @@ public class Contact
 	 *            : numero appelant
 	 * @return le nom du contact ou "numero inconnu "+numero
 	 */
-	public static String getContactFromNumber(Context context, String numero)
+	public static @Nullable
+	String getContactFromNumber(Context context, String numero)
 	{
-		String res;
+		String res = null;
 
 		try
 		{
 			String[] COLONNES_NUMERO = new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME};
 			Cursor c = context.getContentResolver().query( Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(numero)), COLONNES_NUMERO, null,
 					null, null);
-			c.moveToFirst();
-			res = c.getString(c.getColumnIndexOrThrow(ContactsContract.PhoneLookup.DISPLAY_NAME));
-			c.close();
+			if (c!=null)
+			{
+				c.moveToFirst();
+				res = c.getString(c.getColumnIndexOrThrow(ContactsContract.PhoneLookup.DISPLAY_NAME));
+				c.close();
+			}
 
 		} catch (Exception e)
 		{

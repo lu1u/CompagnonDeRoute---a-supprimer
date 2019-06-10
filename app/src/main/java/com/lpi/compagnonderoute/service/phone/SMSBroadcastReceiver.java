@@ -14,21 +14,9 @@ import com.lpi.reportlibrary.Report;
 
 public class SMSBroadcastReceiver extends BroadcastReceiver
 {
-    private static final String TAG = "SmsBroadcastReceiver";
-
-//	private final String _serviceProviderNumber;
-//	private final String _serviceProviderSmsCondition;
-
-
     public SMSBroadcastReceiver()
     {
     }
-//	String serviceProviderNumber, String
-//	} serviceProviderSmsCondition)
-//	{
-//		_serviceProviderNumber = serviceProviderNumber;
-//		_serviceProviderSmsCondition = serviceProviderSmsCondition;
-//	}
 
     @Override
     public void onReceive(Context context, Intent intent)
@@ -41,18 +29,18 @@ public class SMSBroadcastReceiver extends BroadcastReceiver
             if (!preferences.isEnCours())
                 // Rien a faire
                 return;
-            if (preferences.getLireSMS() == Preferences.ENTRANT.JAMAIS && preferences.getRepondreSMS() == Preferences.ENTRANT.JAMAIS)
+            if ((preferences.getLireSMS() == Preferences.ENTRANT.JAMAIS) && (preferences.getRepondreSMS() == Preferences.ENTRANT.JAMAIS))
                 return;
 
             Bundle bundle = intent.getExtras();
-
-            if (intent.getAction().equals(Telephony.Sms.Intents.SMS_RECEIVED_ACTION))
+            if ( bundle!=null)
+            if (Telephony.Sms.Intents.SMS_RECEIVED_ACTION.equals(intent.getAction()))
             {
                 int subscriptionId = bundle.getInt("subscription", -1);
                 SmsMessage[] smsMessages = Telephony.Sms.Intents.getMessagesFromIntent(intent);
                 for (SmsMessage sms : smsMessages)
                 {
-                    r.log(Report.NIVEAU.DEBUG, "*SMS recu:");
+                    r.log(Report.NIVEAU.DEBUG, "*SMSUtils recu:");
                     r.log(Report.NIVEAU.DEBUG, "Subscription ID:" + subscriptionId);
                     r.log(Report.NIVEAU.DEBUG, "Adress:" + sms.getDisplayOriginatingAddress());
                     r.log(Report.NIVEAU.DEBUG, "DisplayMessageBody " + sms.getDisplayMessageBody());
@@ -79,35 +67,41 @@ public class SMSBroadcastReceiver extends BroadcastReceiver
         }
     }
 
+    /*******************************************************************************************************************
+     * Envoyer un message de reponse automatique
+     * @param context
+     * @param sms
+     * @param subscriptionId
+     *******************************************************************************************************************/
     private void repondreSMS(final @NonNull Context context, @NonNull final SmsMessage sms, int subscriptionId)
     {
         String contact = sms.getDisplayOriginatingAddress();
 
         if (Preferences.getInstance(context).getRepondreSMS() == Preferences.ENTRANT.SI_CONTACT)
         {
-            contact = Contact.getContactFromNumber(context, contact);
+            contact = ContactUtils.getContactFromNumber(context, contact);
             if (contact == null)
                 // Ce sms ne provient pas d'un de nos contacts
                 return;
         }
 
-        SMS.send(context, sms.getDisplayOriginatingAddress(),
+        SMSUtils.send(context, sms.getDisplayOriginatingAddress(),
                 Preferences.getInstance(context).getReponseSMS() + "\n(Message envoyé automatiquement par l'application Compagnon de Route (c)2019 Lucien Pilloni)",
                 subscriptionId);
     }
 
-    /***
+    /*******************************************************************************************************************
      * Lire le sms en synthese vocale
      * @param context
      * @param sms
-     */
+     *******************************************************************************************************************/
     private void lireSMS(Context context, final @NonNull SmsMessage sms)
     {
         String contact = sms.getDisplayOriginatingAddress();
 
         if (Preferences.getInstance(context).getLireSMS() == Preferences.ENTRANT.SI_CONTACT)
         {
-            contact = Contact.getContactFromNumber(context, contact);
+            contact = ContactUtils.getContactFromNumber(context, contact);
             if (contact == null)
                 // Ce sms ne provient pas d'un de nos contacts
                 return;
@@ -117,9 +111,7 @@ public class SMSBroadcastReceiver extends BroadcastReceiver
         if (contact != null && body != null)
         {
             String message = context.getResources().getString(R.string.format_nouveau_sms, contact, body);
-            TextToSpeechManager.getInstance(context).annonceFromReceiver(message);
+            TextToSpeechManager.getInstance(context).annonceFromReceiver(context, message);
         }
     }
-
-
 }

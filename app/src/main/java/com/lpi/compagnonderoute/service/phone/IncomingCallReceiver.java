@@ -14,7 +14,7 @@ public class IncomingCallReceiver extends BroadcastReceiver
 {
     protected void onIncomingCallStarted(Context context, String number, long subId)
     {
-        String contact = Contact.getContactFromNumber(context, number);
+        String contact = ContactUtils.getContactFromNumber(context, number);
 
         // Annoncer l'appel
         Preferences prefs = Preferences.getInstance(context);
@@ -27,7 +27,7 @@ public class IncomingCallReceiver extends BroadcastReceiver
             if (appelant != null)
             {
                 String message = context.getResources().getString(R.string.format_appel_telephonique, appelant);
-                TextToSpeechManager.getInstance(context).annonceFromReceiver(message + ", subscription " + subId);
+                TextToSpeechManager.getInstance(context).annonceFromReceiver(context, message + ", subscription " + subId);
             }
         }
 
@@ -40,9 +40,11 @@ public class IncomingCallReceiver extends BroadcastReceiver
 
             if (appelant != null)
             {
-                SMS.send(context, number, Preferences.getInstance(context).getReponseSMS() + "\n(Message envoyé automatiquement par l'application Compagnon de Route (c)2019 Lucien Pilloni)", 0);
+                SMSUtils.send(context, number, Preferences.getInstance(context).getReponseSMS() + "\n(Message envoyé automatiquement par l'application Compagnon de Route (c)2019 Lucien Pilloni)", 0);
             }
         }
+
+        PhoneUtils.rejectCall(context);
     }
 
 //	protected void onOutgoingCallStarted(Context ctx, String number, Date start) {
@@ -121,24 +123,26 @@ public class IncomingCallReceiver extends BroadcastReceiver
         try
         {
             Bundle b = intent.getExtras();
+            if ( b!=null)
+            {
+                String stateStr = b.getString(TelephonyManager.EXTRA_STATE);
+                String number = b.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
+                long subId = intent.getLongExtra("subscription", 1);
 
-            String stateStr = b.getString(TelephonyManager.EXTRA_STATE);
-            String number = b.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
-            long subId = intent.getLongExtra("subscription", 1);
+                int state = 0;
+                if (TelephonyManager.EXTRA_STATE_IDLE.equals(stateStr))
+                {
+                    state = TelephonyManager.CALL_STATE_IDLE;
+                } else if (TelephonyManager.EXTRA_STATE_OFFHOOK.equals(stateStr))
+                {
+                    state = TelephonyManager.CALL_STATE_OFFHOOK;
+                } else if (TelephonyManager.EXTRA_STATE_RINGING.equals(stateStr))
+                {
+                    state = TelephonyManager.CALL_STATE_RINGING;
+                }
 
-            int state = 0;
-            if (stateStr.equals(TelephonyManager.EXTRA_STATE_IDLE))
-            {
-                state = TelephonyManager.CALL_STATE_IDLE;
-            } else if (stateStr.equals(TelephonyManager.EXTRA_STATE_OFFHOOK))
-            {
-                state = TelephonyManager.CALL_STATE_OFFHOOK;
-            } else if (stateStr.equals(TelephonyManager.EXTRA_STATE_RINGING))
-            {
-                state = TelephonyManager.CALL_STATE_RINGING;
+                onCallStateChanged(context, state, number, subId);
             }
-
-            onCallStateChanged(context, state, number, subId);
         } catch (Exception e)
         {
             Report r = Report.getInstance(context);

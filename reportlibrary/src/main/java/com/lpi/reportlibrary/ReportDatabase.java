@@ -11,9 +11,9 @@ public class ReportDatabase
 
 	@Nullable
 	protected static ReportDatabase INSTANCE = null;
-	protected SQLiteDatabase database;
-	protected ReportDatabaseHelper dbHelper;
-	protected String _tableName;
+	protected final SQLiteDatabase database;
+	protected final ReportDatabaseHelper dbHelper;
+	protected final String _tableName;
 
 	protected ReportDatabase(String table, Context context)
 	{

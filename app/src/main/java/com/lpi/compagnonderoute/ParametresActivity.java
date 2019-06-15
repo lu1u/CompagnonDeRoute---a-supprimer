@@ -2,6 +2,7 @@ package com.lpi.compagnonderoute;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +15,11 @@ import com.lpi.compagnonderoute.utils.Preferences;
 public class ParametresActivity extends AppCompatActivity {
 
 
-    /***
+    /*******************************************************************************************************************
      * Demarre l'activite
-     */
-    public static void start(final Activity context) {
+     *******************************************************************************************************************/
+    public static void start(@NonNull final Activity context)
+    {
         final AlertDialog dialogBuilder = new AlertDialog.Builder(context).create();
         LayoutInflater inflater = context.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.activity_parametres, null);

@@ -19,7 +19,7 @@ public class SMSBroadcastReceiver extends BroadcastReceiver
     }
 
     @Override
-    public void onReceive(Context context, Intent intent)
+    public void onReceive(@NonNull final Context context, @NonNull final Intent intent)
     {
         Report r = Report.getInstance(context);
 
@@ -95,7 +95,7 @@ public class SMSBroadcastReceiver extends BroadcastReceiver
      * @param context
      * @param sms
      *******************************************************************************************************************/
-    private void lireSMS(Context context, final @NonNull SmsMessage sms)
+    private void lireSMS(@NonNull final Context context, @NonNull final SmsMessage sms)
     {
         String contact = sms.getDisplayOriginatingAddress();
 

@@ -34,7 +34,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
 {
-	private static final String[] PERMISSIONS = {
+	@NonNull private static final String[] PERMISSIONS = {
 			Manifest.permission.VIBRATE,
 			Manifest.permission.READ_SMS,
 			Manifest.permission.READ_CONTACTS,
@@ -46,15 +46,14 @@ public class MainActivity extends AppCompatActivity
 			Manifest.permission.CALL_PHONE};
 
 	private ImageButton btnStart, btnStop;
-	private @Nullable
-	RadioGroup rgAnnonceHeure, rgConseillerPause, rgLireSMS, rgRepondreSMS, rgRepondreAppels, rgAnnoncerAppels;
+	private @Nullable RadioGroup rgAnnonceHeure, rgConseillerPause, rgLireSMS, rgRepondreSMS, rgRepondreAppels, rgAnnoncerAppels;
 	private ImageButton btnReponseSMS, btnReponseAppels;
 	private TextView tvMessage;
 
 	@Nullable
 	private Preferences _preferences;
 
-	final BroadcastReceiver _receiverProchaineAlarme = new BroadcastReceiver()
+	@NonNull final BroadcastReceiver _receiverProchaineAlarme = new BroadcastReceiver()
 	{
 		@Override
 		public void onReceive(final Context context, final Intent intent)
@@ -71,7 +70,7 @@ public class MainActivity extends AppCompatActivity
 		}
 	};
 
-	final IntentFilter _intentFilter = new IntentFilter(Plannificateur.ACTION_MESSAGE_UI);
+	@NonNull final IntentFilter _intentFilter = new IntentFilter(Plannificateur.ACTION_MESSAGE_UI);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -103,9 +102,9 @@ public class MainActivity extends AppCompatActivity
 		super.onDestroy();
 	}
 
-	/***
+	/*******************************************************************************************************************
 	 * Retrouve les objets permettant de manipuler les controles
-	 */
+	 *******************************************************************************************************************/
 	private void getControlsFromIds()
 	{
 		btnStart = findViewById(R.id.imageButtonStart);
@@ -381,13 +380,17 @@ public class MainActivity extends AppCompatActivity
 		return true;
 	}
 
+	/*******************************************************************************************************************
+	 * Verifie que toutes les permissions demandées par l'application ont bien ete accordées et fait une demande au
+	 * systeme si besoin
+	 *******************************************************************************************************************/
 	private void demandePermissionsSiBesoin()
 	{
 		if (verifiePermissions())
 			return;
 
 		AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
-		dlgAlert.setMessage("Cette application ne peut pas fonctionner sans que vous lui accordiez la permission d'accéder à certaines fonctionnalités de votre téléphone.");
+		dlgAlert.setMessage("L'application Compagnon de Route ne peut pas fonctionner sans que vous lui accordiez la permission d'accéder à certaines fonctionnalités de votre téléphone.");
 		dlgAlert.setTitle("Permissions manquantes");
 		dlgAlert.setCancelable(false);
 		dlgAlert.setPositiveButton("Ok",
@@ -401,9 +404,12 @@ public class MainActivity extends AppCompatActivity
 				});
 
 		dlgAlert.create().show();
-
 	}
 
+	/*******************************************************************************************************************
+	 * Verifie que toutes les permissions demandées par l'application ont bien ete accordées
+	 * @return false si au moins une permission n'est pas accordee
+	 *******************************************************************************************************************/
 	private boolean verifiePermissions()
 	{
 		for (String p : PERMISSIONS)
@@ -413,18 +419,18 @@ public class MainActivity extends AppCompatActivity
 		return true;
 	}
 
-	/***
+	/*******************************************************************************************************************
 	 * Affiche un message generique
 	 * @param message
-	 */
+	 *******************************************************************************************************************/
 	private void message(@NonNull final String message)
 	{
 		TextToSpeechManager.getInstance(this).annonce(this, message);
 	}
 
-	/***
+	/*******************************************************************************************************************
 	 * demarrer les messages de notification
-	 */
+	 *******************************************************************************************************************/
 	private void demarrerNotifications()
 	{
 		message("Démarrage");
@@ -436,9 +442,9 @@ public class MainActivity extends AppCompatActivity
 		CompagnonService.start(this);
 	}
 
-	/***
+	/*******************************************************************************************************************
 	 * Arreter les messages de notification
-	 */
+	 *******************************************************************************************************************/
 	private void arreterNotifications()
 	{
 		message("Arrêt");
@@ -469,9 +475,9 @@ public class MainActivity extends AppCompatActivity
 		}
 	}
 
-	/***
+	/*******************************************************************************************************************
 	 * Mettre l'interface a jour en fonction de la configuration
-	 */
+	 *******************************************************************************************************************/
 	private void majUI()
 	{
 		if (rgAnnonceHeure != null)

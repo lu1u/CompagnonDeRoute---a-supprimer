@@ -14,7 +14,7 @@ import com.lpi.compagnonderoute.utils.Preferences;
 
 public class ThemeActivity extends AppCompatActivity
 {
-    public static void start(Activity activity)
+    public static void start(@NonNull final Activity activity)
     {
         final AlertDialog dialogBuilder = new AlertDialog.Builder(activity).create();
         LayoutInflater inflater = activity.getLayoutInflater();

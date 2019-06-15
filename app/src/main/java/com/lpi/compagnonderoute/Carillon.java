@@ -4,8 +4,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.format.DateUtils;
-
-
 import com.lpi.compagnonderoute.plannificateur.Plannificateur;
 import com.lpi.compagnonderoute.utils.Preferences;
 
@@ -13,14 +11,12 @@ import java.util.Calendar;
 
 public class Carillon
 {
-	static final String TAG = "Carillon";
-
-	/***
+	/*******************************************************************************************************************
 	 * Calcule l'heure de la prochaine notification d'annonce de l'heure
 	 * @param maintenant
 	 * @param preferences
 	 * @return
-	 */
+	 *******************************************************************************************************************/
 	public static @Nullable Calendar getProchaineNotification(@NonNull final Calendar maintenant, @NonNull final Preferences preferences)
 	{
 		Calendar depart ;
@@ -42,7 +38,7 @@ public class Carillon
 				depart = Plannificateur.prochaineQuartDHeure(maintenant);
 				break;
 
-			default:
+			default: //??? On ne devrait jamais passer par la
 				depart = (Calendar) maintenant.clone();
 				depart.roll(Calendar.MINUTE, 5);    // Histoire d'avoir qq chose
 		}
@@ -50,10 +46,9 @@ public class Carillon
 		return depart;
 	}
 
-	/**
+	/*******************************************************************************************************************
 	 * Calcule une representation textuelle de l'heure
-	 */
-	@SuppressWarnings("nls")
+	 *******************************************************************************************************************/
 	public static String toHourString(Context context, Calendar c)
 	{
 		return DateUtils.formatDateTime(context, c.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);

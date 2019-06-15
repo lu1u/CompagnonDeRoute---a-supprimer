@@ -16,7 +16,8 @@ import android.widget.TextView;
 public class ModalEditText
 {
 	/***
-	 *
+	 * Edition d'un texte dans une fenetre "modale"
+	 * Fournir un ModalEditListener pour etre averti du changement
 	 * @param activity
 	 * @param idLayout
 	 * @param idTitre

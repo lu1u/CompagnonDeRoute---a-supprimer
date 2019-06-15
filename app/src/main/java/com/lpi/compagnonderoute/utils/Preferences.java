@@ -13,16 +13,16 @@ public class Preferences
 {
 	private static final String PREFERENCES = Preferences.class.getName();
 
-	public long getDernierSMS()
-	{
-		return _dernierSMS;
-	}
-
-	public void setDernierSMS(long dernierSMS)
-	{
-		_dernierSMS = dernierSMS;
-		_dirty = true;
-	}
+//	public long getDernierSMS()
+//	{
+//		return _dernierSMS;
+//	}
+//
+//	public void setDernierSMS(long dernierSMS)
+//	{
+//		_dernierSMS = dernierSMS;
+//		_dirty = true;
+//	}
 
 	public ENTRANT getAnnoncerAppels()
 	{

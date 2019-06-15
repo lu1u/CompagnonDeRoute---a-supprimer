@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 public class ContactUtils
@@ -16,7 +17,7 @@ public class ContactUtils
 	 * @return le nom du contact ou "numero inconnu "+numero
 	 */
 	public static @Nullable
-	String getContactFromNumber(Context context, String numero)
+	String getContactFromNumber(@NonNull final Context context, @NonNull final String numero)
 	{
 		String res = null;
 
@@ -36,8 +37,7 @@ public class ContactUtils
 		{
 			if (numero.startsWith("+33")) //$NON-NLS-1$
 			{
-				numero = "0" + numero.substring(3); //$NON-NLS-1$
-				return getContactFromNumber(context, numero);
+				return getContactFromNumber(context, "0" + numero.substring(3));
 			} else
 				res = null;
 		}

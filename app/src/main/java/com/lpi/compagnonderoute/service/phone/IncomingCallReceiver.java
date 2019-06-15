@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
 import com.lpi.compagnonderoute.R;
 import com.lpi.compagnonderoute.textToSpeech.TextToSpeechManager;
@@ -12,7 +13,7 @@ import com.lpi.reportlibrary.Report;
 
 public class IncomingCallReceiver extends BroadcastReceiver
 {
-    protected void onIncomingCallStarted(Context context, String number, long subId)
+    protected void onIncomingCallStarted(@NonNull final Context context, String number, long subId)
     {
         String contact = ContactUtils.getContactFromNumber(context, number);
 
@@ -68,7 +69,7 @@ public class IncomingCallReceiver extends BroadcastReceiver
 
     //Incoming call-  goes from IDLE to RINGING when it rings, to OFFHOOK when it's answered, to IDLE when its hung up
     //Outgoing call-  goes from IDLE to OFFHOOK when it dials out, to IDLE when hung up
-    public void onCallStateChanged(Context context, int state, String number, long subId)
+    public void onCallStateChanged(@NonNull final Context context, int state, String number, long subId)
     {
         Preferences prefs = Preferences.getInstance(context);
         if (!prefs.isEnCours())
@@ -118,7 +119,7 @@ public class IncomingCallReceiver extends BroadcastReceiver
     //private static boolean isIncoming;
     //private static String savedNumber;  //because the passed incoming is only valid in ringing
 
-    public void onReceive(Context context, Intent intent)
+    public void onReceive(@NonNull final Context context, @NonNull final Intent intent)
     {
         try
         {

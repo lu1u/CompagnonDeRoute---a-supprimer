@@ -8,12 +8,15 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.IBinder;
 import android.provider.Telephony;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
 import com.lpi.compagnonderoute.service.phone.IncomingCallReceiver;
 import com.lpi.compagnonderoute.service.phone.SMSBroadcastReceiver;
+import com.lpi.compagnonderoute.textToSpeech.TextToSpeechManager;
 import com.lpi.compagnonderoute.utils.Preferences;
 import com.lpi.reportlibrary.Report;
 
@@ -21,16 +24,16 @@ import java.util.List;
 
 public class CompagnonService extends Service
 {
-	public static final String ACTION_DEMARRAGE = CompagnonService.class.getName() + "DEMARRAGE";
-	public static final String ACTION_ARRET = CompagnonService.class.getName() + "ARRET";
+	@NonNull public static final String ACTION_DEMARRAGE = CompagnonService.class.getName() + "DEMARRAGE";
+	@NonNull public static final String ACTION_ARRET = CompagnonService.class.getName() + "ARRET";
 
-	SMSBroadcastReceiver _smsBroadcastReceiver ;
-	IncomingCallReceiver _incomingCallReceiver;
+	@Nullable SMSBroadcastReceiver _smsBroadcastReceiver ;
+	@Nullable IncomingCallReceiver _incomingCallReceiver;
 	public CompagnonService()
 	{
 	}
 
-	public static void start(final Context context)
+	public static void start(@NonNull final Context context)
 	{
 		Preferences prefs = Preferences.getInstance(context);
 		if (prefs.isEnCours())
@@ -45,7 +48,7 @@ public class CompagnonService extends Service
 			}
 	}
 
-	public static void stop(final Context context)
+	public static void stop(@NonNull final Context context)
 	{
 		Report r = Report.getInstance(context);
 		r.log(Report.NIVEAU.DEBUG, "Arret du service");
@@ -63,7 +66,7 @@ public class CompagnonService extends Service
 	}
 
 	@Override
-	public int onStartCommand(Intent intent, int flags, int startId)
+	public int onStartCommand(@NonNull Intent intent, int flags, int startId)
 	{
 		try
 		{
@@ -119,6 +122,8 @@ public class CompagnonService extends Service
 
 	private void handleActionDemarre()
 	{
+		TextToSpeechManager.getInstance(this);
+
 		Report.getInstance(this).log(Report.NIVEAU.DEBUG, "handleActionDemarre");
 		Preferences prefs = Preferences.getInstance(this);
 		if ((prefs.getLireSMS() != Preferences.ENTRANT.JAMAIS) || (prefs.getRepondreSMS() != Preferences.ENTRANT.JAMAIS))

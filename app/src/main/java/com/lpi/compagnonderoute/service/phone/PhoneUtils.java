@@ -1,13 +1,15 @@
 package com.lpi.compagnonderoute.service.phone;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
+import com.lpi.reportlibrary.Report;
 
 import java.lang.reflect.Method;
 
 public class PhoneUtils
 {
-	public static void rejectCall(Context context)
+	public static void rejectCall(@NonNull final Context context)
 	{
 		try
 		{
@@ -24,9 +26,11 @@ public class PhoneUtils
 			Method methodEndCall = telephonyInterfaceClass.getDeclaredMethod("endCall");
 			// Invoke endCall()
 			methodEndCall.invoke(telephonyInterface);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e)
+		{
+			Report r = Report.getInstance(context);
+			r.log(Report.NIVEAU.ERROR, "Erreur lors du rejet d'un appel");
+			r.log(Report.NIVEAU.ERROR, e);
 		}
 	}
 }

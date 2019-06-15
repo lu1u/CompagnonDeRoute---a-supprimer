@@ -19,8 +19,6 @@ public class AlarmReceiver extends BroadcastReceiver
 {
 	/***
 	 * Reception d'une alarme
-	 * @param context
-	 * @param intent
 	 */
 	@Override
 	public void onReceive(@NonNull Context context, @NonNull Intent intent)
@@ -79,7 +77,7 @@ public class AlarmReceiver extends BroadcastReceiver
 	 * Annonce l'heure
 	 * @param context
 	 */
-	private void annonceCarillon(final Context context)
+	private void annonceCarillon(@NonNull final Context context)
 	{
 		Preferences preferences = Preferences.getInstance(context);
 		if ( preferences.isEnCours() && (preferences.getDelaiAnnonceHeure()!= Preferences.ANNONCER_HEURE.JAMAIS))

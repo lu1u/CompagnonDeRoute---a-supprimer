@@ -21,7 +21,6 @@ public class TextToSpeechIntentService extends IntentService
 	{
 		super("TextToSpeechIntentService");
 	}
-
 	/**
 	 * Starts this service to perform action Foo with the given parameters. If
 	 * the service is already performing a task this action will be queued.
@@ -29,7 +28,7 @@ public class TextToSpeechIntentService extends IntentService
 	 * @see IntentService
 	 */
 	// TODO: Customize helper method
-	public static void start(Context context, @NonNull String message)
+	public static void start(@NonNull final Context context, @NonNull final String message)
 	{
 		Intent intent = new Intent(context, TextToSpeechIntentService.class);
 		intent.setAction(ACTION);
@@ -45,7 +44,7 @@ public class TextToSpeechIntentService extends IntentService
 		{
 			final String param1 = intent.getStringExtra(EXTRA_MESSAGE);
 			if (param1 != null)
-				TextToSpeechManager.getInstance(this).annonce(this, param1);
+				TextToSpeechManager.getInstance(this).annonce(this.getApplicationContext(), param1);
 		}
 	}
 }

@@ -17,7 +17,7 @@ public static final int ID_FIRST = 0;
 public static final int ID_LAST = 1;
 private static final String TAG = "WithIdCursorWrapper";
 private boolean mIsIdAdded = true;
-private int mIdPosition;
+private final int mIdPosition;
 
 /**
  * @param c

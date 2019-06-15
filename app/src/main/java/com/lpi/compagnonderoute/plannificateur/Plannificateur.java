@@ -20,12 +20,12 @@ import java.util.Calendar;
 
 public class Plannificateur
 {
-    public static final String ACTION_MESSAGE_UI = Plannificateur.class.getName() + ".messageUI";
-    public static final String ACTION_ALARME = Plannificateur.class.getName() + ".action";
+    @NonNull public static final String ACTION_MESSAGE_UI = Plannificateur.class.getName() + ".messageUI";
+    @NonNull public static final String ACTION_ALARME = Plannificateur.class.getName() + ".action";
 
-    public static final String EXTRA_MESSAGE_UI = "MessageUI";
+    @NonNull public static final String EXTRA_MESSAGE_UI = "MessageUI";
 
-    public static final String EXTRA_TYPE_NOTIFICATION = "type notification";
+    @NonNull public static final String EXTRA_TYPE_NOTIFICATION = "type notification";
     public static final int TYPE_NOTIFICATION_CARILLON = 0;
     public static final int TYPE_NOTIFICATION_PAUSE = 1;
 
@@ -208,7 +208,7 @@ public class Plannificateur
      *
      * @param messageUI
      */
-    private void envoieMessageUI(Context context, final String messageUI)
+    private void envoieMessageUI(@NonNull Context context, @NonNull final String messageUI)
     {
         Intent intent = new Intent(ACTION_MESSAGE_UI);
         intent.putExtra(EXTRA_MESSAGE_UI, messageUI);
@@ -219,7 +219,7 @@ public class Plannificateur
      * Arrete la plannificaton
      * @param context
      */
-    public void arrete(final Context context)
+    public void arrete(@NonNull final Context context)
     {
         if (_pendingIntent != null)
             _alarmManager.cancel(_pendingIntent);

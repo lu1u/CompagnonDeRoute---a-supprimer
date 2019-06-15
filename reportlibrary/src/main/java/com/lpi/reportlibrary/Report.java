@@ -9,9 +9,6 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import com.lpi.reportlibrary.database.DatabaseHelper;
 
-import java.util.Calendar;
-import java.util.Locale;
-
 
 /**
  * @author lucien
@@ -19,8 +16,8 @@ import java.util.Locale;
 @SuppressWarnings("nls")
 public class Report
 {
-	private static final String TAG = "Report";
-	private static boolean DEBUG_MODE = BuildConfig.DEBUG;
+	@NonNull private static final String TAG = "Report";
+	@NonNull private static final boolean DEBUG_MODE = BuildConfig.DEBUG;
 
 	// Niveaux de trace
 	public enum NIVEAU
@@ -94,16 +91,16 @@ public class Report
 	}
 
 	@SuppressWarnings("boxing")
-	public static String getLocalizedDate(long date)
-	{
-		Calendar c = Calendar.getInstance();
-		c.setTimeInMillis(date);
-
-		return String.format(Locale.getDefault(), "%02d/%02d/%02d %02d:%02d:%02d",
-				c.get(Calendar.DAY_OF_MONTH),
-				(c.get(Calendar.MONTH) + 1), c.get(Calendar.YEAR), c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE),
-				c.get(Calendar.SECOND)); // + ":" + c.get(Calendar.MILLISECOND) ;
-	}
+//	public static String getLocalizedDate(long date)
+//	{
+//		Calendar c = Calendar.getInstance();
+//		c.setTimeInMillis(date);
+//
+//		return String.format(Locale.getDefault(), "%02d/%02d/%02d %02d:%02d:%02d",
+//				c.get(Calendar.DAY_OF_MONTH),
+//				(c.get(Calendar.MONTH) + 1), c.get(Calendar.YEAR), c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE),
+//				c.get(Calendar.SECOND)); // + ":" + c.get(Calendar.MILLISECOND) ;
+//	}
 
 
 	public void log(@NonNull NIVEAU niv, @NonNull String message)

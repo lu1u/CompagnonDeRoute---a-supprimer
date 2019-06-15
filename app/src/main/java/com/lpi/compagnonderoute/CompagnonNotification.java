@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 
 /**
@@ -21,26 +22,14 @@ public class CompagnonNotification
 	/**
 	 * The unique identifier for this type of notification.
 	 */
-	private static final String NOTIFICATION_TAG = "Compagnon";
+	@NonNull private static final String NOTIFICATION_TAG = "Compagnon";
 
 	/**
 	 * Shows the notification, or updates a previously shown notification of
 	 * this type, with the given parameters.
-	 * <p>
-	 * TODO: Customize this method's arguments to present relevant content in
-	 * the notification.
-	 * <p>
-	 * TODO: Customize the contents of this method to tweak the behavior and
-	 * presentation of compagnon notifications. Make
-	 * sure to follow the
-	 * <a href="https://developer.android.com/design/patterns/notifications.html">
-	 * Notification design guidelines</a> when doing so.
-	 *
 	 * @see #cancel(Context)
 	 */
-	public static void notify(final Context context,
-	                          final String texte,
-	                          final String texteResume)
+	public static void notify(@NonNull final Context context, @NonNull final String texte,@NonNull final String texteResume)
 	{
 		Intent ii = new Intent(context.getApplicationContext(), MainActivity.class);
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, ii, 0);
@@ -60,9 +49,6 @@ public class CompagnonNotification
 		builder.setStyle(bigText);
 
 		final NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-
-//===removed some obsoletes
 		if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.O)
 		{
 			String channelId = "Your_channel_id";

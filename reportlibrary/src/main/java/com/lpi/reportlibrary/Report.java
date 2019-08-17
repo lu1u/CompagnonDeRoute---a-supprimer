@@ -1,5 +1,9 @@
 /**
- *
+ * Enregistre les traces du programme dans une base de donnees, consultable avec ReportActivity
+ * Deux modes:
+ *      - LOG
+ *      - HISTORIQUE
+ * Les traces ne sont enregistrees qu'en mode DEBUG
  */
 package com.lpi.reportlibrary;
 
@@ -90,18 +94,6 @@ public class Report
 		}
 	}
 
-	@SuppressWarnings("boxing")
-//	public static String getLocalizedDate(long date)
-//	{
-//		Calendar c = Calendar.getInstance();
-//		c.setTimeInMillis(date);
-//
-//		return String.format(Locale.getDefault(), "%02d/%02d/%02d %02d:%02d:%02d",
-//				c.get(Calendar.DAY_OF_MONTH),
-//				(c.get(Calendar.MONTH) + 1), c.get(Calendar.YEAR), c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE),
-//				c.get(Calendar.SECOND)); // + ":" + c.get(Calendar.MILLISECOND) ;
-//	}
-
 
 	public void log(@NonNull NIVEAU niv, @NonNull String message)
 	{
@@ -127,6 +119,5 @@ public class Report
 		if (DEBUG_MODE)
 			_historiqueDatabase.ajoute(DatabaseHelper.CalendarToSQLiteDate(null), message);
 	}
-
 
 }

@@ -5,12 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import com.lpi.compagnonderoute.R;
-import com.lpi.compagnonderoute.utils.Preferences;
 import com.lpi.reportlibrary.Report;
 
 import java.util.ArrayList;
@@ -20,7 +17,7 @@ import java.util.ArrayList;
  * Classe singleton pour faciliter la synthese vocale sous Android
  */
 
-public class TextToSpeechManager implements TextToSpeech.OnInitListener
+public class TextToSpeechManager //implements TextToSpeech.OnInitListener
 {
 	@Nullable
 	private static TextToSpeechManager INSTANCE = null;
@@ -50,52 +47,52 @@ public class TextToSpeechManager implements TextToSpeech.OnInitListener
 	private TextToSpeechManager(Context context)
 	{
 		_context = context;
-		_pendingMessages = new ArrayList<>();
-		try
-		{
-			_mediaPlayer = MediaPlayer.create(context, R.raw.beep2);
-
-		} catch (Exception e)
-		{
-			_mediaPlayer = null;
-			Report r = Report.getInstance(context);
-			r.log(Report.NIVEAU.ERROR, "Erreur initialisation MediaPlayer");
-			r.log(Report.NIVEAU.ERROR, e);
-
-		}
-
-		try
-		{
-			_ttsInitialise = false;
-			_textToSpeech = new TextToSpeech(context, this);
-		}
-		catch (Exception e)
-		{
-			_textToSpeech = null;
-			Report r = Report.getInstance(context);
-			r.log(Report.NIVEAU.ERROR, "Erreur initialisation TextToSpeech");
-			r.log(Report.NIVEAU.ERROR, e);
-		}
+		//_pendingMessages = new ArrayList<>();
+		//try
+		//{
+		//	_mediaPlayer = MediaPlayer.create(context, R.raw.beep2);
+//
+		//} catch (Exception e)
+		//{
+		//	_mediaPlayer = null;
+		//	Report r = Report.getInstance(context);
+		//	r.log(Report.NIVEAU.ERROR, "Erreur initialisation MediaPlayer");
+		//	r.log(Report.NIVEAU.ERROR, e);
+//
+		//}
+//
+		//try
+		//{
+		//	_ttsInitialise = false;
+		//	_textToSpeech = new TextToSpeech(context, this);
+		//}
+		//catch (Exception e)
+		//{
+		//	_textToSpeech = null;
+		//	Report r = Report.getInstance(context);
+		//	r.log(Report.NIVEAU.ERROR, "Erreur initialisation TextToSpeech");
+		//	r.log(Report.NIVEAU.ERROR, e);
+		//}
 	}
 
-	public void finalize()
-	{
-		try
-		{
-			super.finalize();
-			if (_textToSpeech !=null)
-				_textToSpeech.shutdown();
-
-			if (_mediaPlayer !=null)
-				_mediaPlayer.release();
-		}
-		catch(Exception e)
-		{
-		}
-		catch (Throwable throwable)
-		{
-		}
-	}
+	//public void finalize()
+	//{
+	//	try
+	//	{
+	//		super.finalize();
+	//		if (_textToSpeech !=null)
+	//			_textToSpeech.shutdown();
+//
+	//		if (_mediaPlayer !=null)
+	//			_mediaPlayer.release();
+	//	}
+	//	catch(Exception e)
+	//	{
+	//	}
+	//	catch (Throwable throwable)
+	//	{
+	//	}
+	//}
 	/*******************************************************************************************************************
 	 * Ouvre la fenetre de configuration Synthese Vocale du systeme
 	 * @param mainActivity
@@ -112,42 +109,44 @@ public class TextToSpeechManager implements TextToSpeech.OnInitListener
 	 *******************************************************************************************************************/
 	public void annonce(@NonNull final Context context, @NonNull final String message)
 	{
-		try
-		{
-			if (_mediaPlayer!=null)
-			{
-				final Bundle ttsParams = getTtsParams();
+		annonceFromReceiver(context, message);
+		//try
+		//{
+		//	if (_mediaPlayer!=null)
+		//	{
+		//		final Bundle ttsParams = getTtsParams();
+//
+		//		_mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
+		//		{
+		//			/***
+		//			 * Fonction callback appellee quand le son est termine
+		//			 * @param mp
+		//			 */
+		//			@Override
+		//			public void onCompletion(MediaPlayer mp)
+		//			{
+		//				if (_ttsInitialise && _textToSpeech != null)
+		//					_textToSpeech.speak(message, TextToSpeech.QUEUE_ADD, ttsParams, null);
+		//				else
+		//					// Dire le message une fois que le _textToSpeech sera initialise
+		//					_pendingMessages.add(message);
+		//			}
+		//		});
+//
+		//		final float volume = (float) Preferences.getInstance(context).getVolume() / (float) getMaxVolume(context);
+		//		_mediaPlayer.setVolume(volume, volume);
+		//		_mediaPlayer.seekTo(0);
+		//		_mediaPlayer.start();
+		//		// Attention: suite du code dans le OnCompletionListener (voir plus haut)
+		//	}
+		//}
+		//catch (IllegalStateException e)
+		//{
+		//	Report r = Report.getInstance(context);
+		//	r.log(Report.NIVEAU.ERROR, "Erreur initialisation annonce");
+		//	r.log(Report.NIVEAU.ERROR, e);
+		//}
 
-				_mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
-				{
-					/***
-					 * Fonction callback appellee quand le son est termine
-					 * @param mp
-					 */
-					@Override
-					public void onCompletion(MediaPlayer mp)
-					{
-						if (_ttsInitialise && _textToSpeech != null)
-							_textToSpeech.speak(message, TextToSpeech.QUEUE_ADD, ttsParams, null);
-						else
-							// Dire le message une fois que le _textToSpeech sera initialise
-							_pendingMessages.add(message);
-					}
-				});
-
-				final float volume = (float) Preferences.getInstance(context).getVolume() / (float) getMaxVolume(context);
-				_mediaPlayer.setVolume(volume, volume);
-				_mediaPlayer.seekTo(0);
-				_mediaPlayer.start();
-				// Attention: suite du code dans le OnCompletionListener (voir plus haut)
-			}
-		}
-		catch (IllegalStateException e)
-		{
-			Report r = Report.getInstance(context);
-			r.log(Report.NIVEAU.ERROR, "Erreur initialisation annonce");
-			r.log(Report.NIVEAU.ERROR, e);
-		}
 
 //			_mediaPlayer.seekTo(0);
 //			_mediaPlayer.start();
@@ -306,16 +305,16 @@ public class TextToSpeechManager implements TextToSpeech.OnInitListener
 	 */
 	public void annonceFromReceiver(@NonNull final Context context, final String message)
 	{
-//		try
-//		{
-//			TextToSpeechIntentService.start(context, message);
-//		} catch (Exception e)
-//		{
-//			Report r = Report.getInstance(context);
-//			r.log(Report.NIVEAU.ERROR, "TextToSpeechManager.annonceFromReceiver");
-//			r.log(Report.NIVEAU.ERROR, e);
-//		}
-		annonce(context, message);
+		try
+		{
+			TextToSpeechIntentService.start(context, message);
+		} catch (Exception e)
+		{
+			Report r = Report.getInstance(context);
+			r.log(Report.NIVEAU.ERROR, "TextToSpeechManager.annonceFromReceiver");
+			r.log(Report.NIVEAU.ERROR, e);
+		}
+//		annonce(context, message);
 	}
 
 	public void annonceFromReceiver(@NonNull Context ctx, int resId, Object... args)
@@ -324,45 +323,51 @@ public class TextToSpeechManager implements TextToSpeech.OnInitListener
 		annonceFromReceiver(ctx, String.format(format, args));
 	}
 
-	/*******************************************************************************************************************
-	 * Le TTS vient d'etre initialise, jouer les messages s'il y en a a dire
-	 * @param status TextToSpeech
-	 ******************************************************************************************************************/
-	@Override
-	public void onInit(int status)
-	{
-		if (status == TextToSpeech.SUCCESS && (_textToSpeech != null))
-		{
-			_ttsInitialise = true;
+	///*******************************************************************************************************************
+	// * Le TTS vient d'etre initialise, jouer les messages s'il y en a a dire
+	// * @param status TextToSpeech
+	// ******************************************************************************************************************/
+	//@Override
+	//public void onInit(int status)
+	//{
+	//	if (status == TextToSpeech.SUCCESS && (_textToSpeech != null))
+	//	{
+	//		_ttsInitialise = true;
+//
+	//		// Jouer les messages en attente
+	//		if (_pendingMessages != null)
+	//		{
+	//			final Bundle ttsParams = getTtsParams();
+//
+	//			// Dire les messages qui étaient en attente de l'initialisation du TTS
+	//			for (String message : _pendingMessages)
+	//				_textToSpeech.speak(message, TextToSpeech.QUEUE_ADD, ttsParams, null);
+//
+	//			_pendingMessages.clear();
+	//		}
+	//	}
+	//	else
+	//	{
+	//		Report report =  Report.getInstance(_context);
+	//		report.log(Report.NIVEAU.ERROR, "Impossible d'initialiser TTS");
+	//		report.log(Report.NIVEAU.ERROR, "Status = " + status);
+	//	}
+	//}
 
-			// Jouer les messages en attente
-			if (_pendingMessages != null)
-			{
-				final Bundle ttsParams = getTtsParams();
 
-				// Dire les messages qui étaient en attente de l'initialisation du TTS
-				for (String message : _pendingMessages)
-					_textToSpeech.speak(message, TextToSpeech.QUEUE_ADD, ttsParams, null);
-
-				_pendingMessages.clear();
-			}
-		}
-	}
-
-
-	/*******************************************************************************************************************
-	 * Construit un bundle de parametres pour TTS, en fonction des preferences
-	 * @return
-	 ******************************************************************************************************************/
-	private @Nullable Bundle getTtsParams()
-	{
-		final Preferences prefs = Preferences.getInstance(_context);
-		if (prefs.isVolumeDefaut())
-			return null;
-		final float volume = (float) prefs.getVolume() / (float) getMaxVolume(_context);
-
-		final Bundle ttsParams = new Bundle();
-		ttsParams.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, volume);
-		return ttsParams;
-	}
+	///*******************************************************************************************************************
+	// * Construit un bundle de parametres pour TTS, en fonction des preferences
+	// * @return
+	// ******************************************************************************************************************/
+	//private @Nullable Bundle getTtsParams()
+	//{
+	//	final Preferences prefs = Preferences.getInstance(_context);
+	//	if (prefs.isVolumeDefaut())
+	//		return null;
+	//	final float volume = (float) prefs.getVolume() / (float) getMaxVolume(_context);
+//
+	//	final Bundle ttsParams = new Bundle();
+	//	ttsParams.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, volume);
+	//	return ttsParams;
+	//}
 }

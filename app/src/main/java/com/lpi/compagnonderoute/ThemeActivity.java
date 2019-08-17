@@ -26,6 +26,8 @@ public class ThemeActivity extends AppCompatActivity
         final ImageButton theme4 = dialogView.findViewById(R.id.imageView4) ;
         final ImageButton theme5 = dialogView.findViewById(R.id.imageView5) ;
         final ImageButton theme6 = dialogView.findViewById(R.id.imageView6) ;
+        final ImageButton theme7 = dialogView.findViewById(R.id.imageView7);
+        final ImageButton theme8 = dialogView.findViewById(R.id.imageView8);
 
         Preferences prefs = Preferences.getInstance(activity);
         switch(prefs.getTheme())
@@ -35,6 +37,12 @@ public class ThemeActivity extends AppCompatActivity
             case 3: theme4.setSelected(true); break;
             case 4: theme5.setSelected(true); break;
             case 5: theme6.setSelected(true); break;
+            case 6:
+                theme7.setSelected(true);
+                break;
+            case 7:
+                theme8.setSelected(true);
+                break;
             default: theme1.setSelected(true); break;
         }
 
@@ -44,6 +52,8 @@ public class ThemeActivity extends AppCompatActivity
         addListener(activity, dialogBuilder, theme4, 3) ;
         addListener(activity, dialogBuilder, theme5, 4) ;
         addListener(activity, dialogBuilder, theme6, 5) ;
+        addListener(activity, dialogBuilder, theme7, 6);
+        addListener(activity, dialogBuilder, theme8, 7);
 
         dialogBuilder.setView(dialogView);
         dialogBuilder.show();

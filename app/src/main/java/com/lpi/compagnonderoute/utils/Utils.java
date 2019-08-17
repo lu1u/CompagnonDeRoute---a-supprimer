@@ -119,6 +119,12 @@ public class Utils
 			case 5:
 				a.setTheme(R.style.Theme6);
 				break;
+			case 6:
+				a.setTheme(R.style.Theme7);
+				break;
+			case 7:
+				a.setTheme(R.style.Theme8);
+				break;
 			case 0:
 			default:
 				a.setTheme(R.style.Theme1);

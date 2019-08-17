@@ -73,6 +73,9 @@ public class MainActivity extends AppCompatActivity
 	@NonNull final IntentFilter _intentFilter = new IntentFilter(Plannificateur.ACTION_MESSAGE_UI);
 
 	@Override
+	/***
+	 * Creation de l'activity
+	 */
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
@@ -282,7 +285,7 @@ public class MainActivity extends AppCompatActivity
 				@Override
 				public void onClick(final View v)
 				{
-					ModalEditText.showEditText(MainActivity.this, R.layout.modal_edit_text, R.id.textViewTitre, R.id.editText, R.id.buttonOK, "SMSUtils: réponse automatique", _preferences.getReponseSMS(), new ModalEditText.ModalEditListener()
+					ModalEditText.showEditText(MainActivity.this, R.layout.modal_edit_text, R.id.textViewTitre, R.id.editText, R.id.buttonOK, "SMS: réponse automatique", _preferences.getReponseSMS(), new ModalEditText.ModalEditListener()
 					{
 						@Override
 						public void onTextEdited(final String s)
@@ -592,6 +595,10 @@ public class MainActivity extends AppCompatActivity
 		}
 	}
 
+	/*******************************************************************************************************************
+	 * Clic sur le bouton "Stop"
+	 * @param v
+	 *******************************************************************************************************************/
 	public void onClickStop(View v)
 	{
 		arreterNotifications();
@@ -602,6 +609,10 @@ public class MainActivity extends AppCompatActivity
 		btnStop.setVisibility(View.GONE);
 	}
 
+	/*******************************************************************************************************************
+	 * Clic sur le bouton "Start"
+	 * @param v
+	 *******************************************************************************************************************/
 	public void onClickStart(View v)
 	{
 		demarrerNotifications();
@@ -623,7 +634,9 @@ public class MainActivity extends AppCompatActivity
 				PictureInPictureParams params = new PictureInPictureParams.Builder() .setAspectRatio(aspectRatio).build();
 				enterPictureInPictureMode(params);
 			} else
+			{
 				enterPictureInPictureMode();
+			}
 		}
 	}
 

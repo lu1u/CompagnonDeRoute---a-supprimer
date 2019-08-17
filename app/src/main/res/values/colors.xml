@@ -103,4 +103,31 @@
     <color name="colorFondEcran6">@color/colorPrimaryDark6</color>
     <color name="colorBorderToggleOff6">#FFF</color>
     <color name="colorBorderToggleOn6">@color/colorAccent6</color>
+
+	<color name="colorPrimary7">#1e88e5</color>
+	<color name="colorPrimaryDark7">#0e3e69</color>
+	<color name="colorPrimaryLight7">#6fb3ee</color>
+	<color name="colorAccent7">#E4577E</color>
+	<color name="colorAccentDark7">#537011</color>
+	<color name="colorAccentLight7">#ed947a</color>
+	<color name="couleurTexteRadioBoutons7">#FFFFFF</color>
+	<color name="colorFondToggleOff7">@color/colorPrimary</color>
+	<color name="colorFondToggleOn7">@color/colorAccent</color>
+	<color name="colorFondEcran7">@android:color/white</color>
+	<color name="colorBorderToggleOff7">@android:color/white</color>
+	<color name="colorBorderToggleOn7">@color/colorAccent</color>
+
+
+	<color name="colorPrimary8">#ff5722</color>
+	<color name="colorPrimaryDark8">#d88315</color>
+	<color name="colorPrimaryLight8">#ffab91</color>
+	<color name="colorAccent8">#ffc107</color>
+	<color name="colorAccentDark8">#ff8f00</color>
+	<color name="colorAccentLight8">#ffe082</color>
+	<color name="couleurTexteRadioBoutons8">#FFFFFF</color>
+	<color name="colorFondToggleOff8">@color/colorPrimary8</color>
+	<color name="colorFondToggleOn8">@color/colorAccent8</color>
+	<color name="colorFondEcran8">@color/colorPrimaryDark8</color>
+	<color name="colorBorderToggleOff8">#fff</color>
+	<color name="colorBorderToggleOn8">@color/colorAccent8</color>
 </resources>

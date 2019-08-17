@@ -1,7 +1,7 @@
 package com.lpi.reportlibrary.database;
 
-/**
- * Utilitaire de gestion de la base de donnees
+/*
+  Utilitaire de gestion de la base de donnees
  */
 
 import android.content.Context;
@@ -27,6 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
 	public static final String COLONNE_HISTORIQUE_LIGNE = "LIGNE";
 	public static final String COLONNE_HISTORIQUE_ID = "_id";
 	public static final String TABLE_TRACES = "TRACES";
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 // Table traces
 	public static final String COLONNE_TRACES_ID = "_id";
@@ -69,15 +70,15 @@ public class DatabaseHelper extends SQLiteOpenHelper
 		return cal;
 	}
 
-	@NonNull
-	public static String getStringFromAnyColumn(@NonNull Cursor cursor, int colonne)
-	{
-		Object o = getObjectFromAnyColumn(cursor, colonne);
-		if (o != null)
-			return o.toString();
-		else
-			return "Impossible de lire la colonne " + cursor.getColumnName(colonne);
-	}
+	//@NonNull
+	//public static String getStringFromAnyColumn(@NonNull Cursor cursor, int colonne)
+	//{
+	//	Object o = getObjectFromAnyColumn(cursor, colonne);
+	//	if (o != null)
+	//		return o.toString();
+	//	else
+	//		return "Impossible de lire la colonne " + cursor.getColumnName(colonne);
+	//}
 
 	@Nullable
 	public static Object getObjectFromAnyColumn(@NonNull Cursor cursor, int colonne)

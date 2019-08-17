@@ -8,5 +8,7 @@
     <dimen name="coins_bouton_marche_arret">128dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
     <dimen name="hauteur_bouton_startstop">128dp</dimen>
+	<dimen name="largeur_bitmap_theme">64dp</dimen>
+	<dimen name="hauteur_bitmap_theme">64dp</dimen>
 
 </resources>

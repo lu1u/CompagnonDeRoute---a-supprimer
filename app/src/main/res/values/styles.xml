@@ -120,6 +120,46 @@
 	    <item name="attrColorTexteRadioBoutons">@color/couleurTexteRadioBoutons6</item>
     </style>
 
+    <style name="Theme7" parent="AppTheme.NoActionBar">
+        <item name="attrColorPrimary">@color/colorPrimary7</item>
+        <item name="attrColorPrimaryDark">@color/colorPrimaryDark7</item>
+        <item name="attrColorPrimaryLight">@color/colorPrimaryLight7</item>
+        <item name="attrColorAccent">@color/colorAccent7</item>
+        <item name="attrColorAccentDark">@color/colorAccentDark7</item>
+        <item name="attrColorAccentLight">@color/colorAccentLight7</item>
+        <item name="attrColorGroupBackground">@android:color/white</item>
+        <item name="attrColorGroupBorder">@color/colorPrimaryDark7</item>
+        <item name="attrColorFondBouton">@color/colorAccent7</item>
+        <item name="attrColorFondBoutonPresse">@color/colorAccentLight7</item>
+        <item name="attrColorBordBouton">@android:color/white</item>
+        <item name="attrColorImageBouton">@android:color/white</item>
+        <item name="attrColorFondToggleOff">@color/colorPrimary7</item>
+        <item name="attrColorFondToggleOn">@color/colorAccent7</item>
+        <item name="attrColorBorderToggleOff">@android:color/transparent</item>
+        <item name="attrColorBorderToggleOn">@android:color/transparent</item>
+        <item name="attrColorTexteRadioBoutons">@color/couleurTexteRadioBoutons7</item>
+    </style>
+
+    <style name="Theme8" parent="AppTheme.NoActionBar">
+        <item name="attrColorPrimary">@color/colorPrimary8</item>
+        <item name="attrColorPrimaryDark">@color/colorPrimaryDark8</item>
+        <item name="attrColorPrimaryLight">@color/colorPrimaryLight8</item>
+        <item name="attrColorAccent">@color/colorAccent8</item>
+        <item name="attrColorAccentDark">@color/colorAccentDark8</item>
+        <item name="attrColorAccentLight">@color/colorAccentLight8</item>
+        <item name="attrColorGroupBackground">@android:color/white</item>
+        <item name="attrColorGroupBorder">@color/colorPrimaryDark8</item>
+        <item name="attrColorFondBouton">@color/colorAccent8</item>
+        <item name="attrColorFondBoutonPresse">@color/colorAccentLight8</item>
+        <item name="attrColorBordBouton">@android:color/white</item>
+        <item name="attrColorImageBouton">@android:color/white</item>
+        <item name="attrColorFondToggleOff">@color/colorPrimary8</item>
+        <item name="attrColorFondToggleOn">@color/colorAccent8</item>
+        <item name="attrColorBorderToggleOff">@android:color/transparent</item>
+        <item name="attrColorBorderToggleOn">@android:color/transparent</item>
+        <item name="attrColorTexteRadioBoutons">@color/couleurTexteRadioBoutons8</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

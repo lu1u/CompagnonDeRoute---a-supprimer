@@ -6,95 +6,17 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 /**
- * Created by lucien on 16/04/2018.
+ * Gestion/stockage des preferences de l'application
  */
 
 public class Preferences
 {
 	private static final String PREFERENCES = Preferences.class.getName();
 
-//	public long getDernierSMS()
-//	{
-//		return _dernierSMS;
-//	}
-//
-//	public void setDernierSMS(long dernierSMS)
-//	{
-//		_dernierSMS = dernierSMS;
-//		_dirty = true;
-//	}
-
-	public ENTRANT getAnnoncerAppels()
-	{
-		return _annoncerAppels;
-	}
-
-	public void setAnnoncerAppels(ENTRANT annoncerAppels)
-	{
-		_annoncerAppels = annoncerAppels;
-		_dirty = true;
-	}
-
-	public boolean isForcerHautParleur()
-	{
-		return _forcerHautParleur;
-	}
-
-	public void setForcerHautParleur(boolean s)
-	{
-		_forcerHautParleur = s;
-		_dirty = true;
-	}
-
-	public boolean isVolumeDefaut()
-	{
-		return _volumeDefaut;
-	}
-
-	public void setVolumeDefaut(boolean b)
-	{
-		_volumeDefaut = b;
-		_dirty = true;
-	}
-
-	public int getVolume()
-	{
-		return _volume;
-	}
-
-	public void setVolume(int i)
-	{
-		_volume = i;
-		_dirty = true;
-	}
-
-	public int getTheme()
-	{
-		return _theme;
-	}
-
-	public void setTheme(int i)
-	{
-		_theme = i;
-		_dirty = true;
-	}
-
-	public boolean isActiverModePip()
-	{
-		return _activerPip;
-	}
-
-	public void setActiverModePip(boolean v)
-	{
-		_activerPip = v;
-		_dirty = true;
-	}
-
 	public enum ANNONCER_HEURE
 	{
 		JAMAIS, TOUTES_LES_HEURES, TOUTES_LES_DEMI_HEURES, TOUS_LES_QUARTS_D_HEURES
 	}
-
 
 	public enum ENTRANT
 	{
@@ -388,5 +310,69 @@ public class Preferences
 		_dirty = true;
 	}
 
+	public ENTRANT getAnnoncerAppels()
+	{
+		return _annoncerAppels;
+	}
 
+	public void setAnnoncerAppels(ENTRANT annoncerAppels)
+	{
+		_annoncerAppels = annoncerAppels;
+		_dirty = true;
+	}
+
+	public boolean isForcerHautParleur()
+	{
+		return _forcerHautParleur;
+	}
+
+	public void setForcerHautParleur(boolean s)
+	{
+		_forcerHautParleur = s;
+		_dirty = true;
+	}
+
+	public boolean isVolumeDefaut()
+	{
+		return _volumeDefaut;
+	}
+
+	public void setVolumeDefaut(boolean b)
+	{
+		_volumeDefaut = b;
+		_dirty = true;
+	}
+
+	public int getVolume()
+	{
+		return _volume;
+	}
+
+	public void setVolume(int i)
+	{
+		_volume = i;
+		_dirty = true;
+	}
+
+	public int getTheme()
+	{
+		return _theme;
+	}
+
+	public void setTheme(int i)
+	{
+		_theme = i;
+		_dirty = true;
+	}
+
+	public boolean isActiverModePip()
+	{
+		return _activerPip;
+	}
+
+	public void setActiverModePip(boolean v)
+	{
+		_activerPip = v;
+		_dirty = true;
+	}
 }

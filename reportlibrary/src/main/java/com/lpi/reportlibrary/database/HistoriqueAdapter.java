@@ -1,4 +1,4 @@
-package com.lpi.reportlibrary;
+package com.lpi.reportlibrary.database;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
-import com.lpi.reportlibrary.database.DatabaseHelper;
+import com.lpi.reportlibrary.R;
 
 import java.util.Calendar;
 

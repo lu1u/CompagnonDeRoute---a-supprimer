@@ -1,14 +1,19 @@
 <resources>
-    <string name="app_name">Compagnon de route</string>
-    <string name="compagnon_notification_title_template">Compagnon de route: %1$s</string>
-    <string name="formatOnSMS">Nouveau SMS, de %1$s. %2$s</string>
-    <string name="unknownContact">contact inconnu %1$s</string>
-    <string name="lowbattery">Batterie faible %1$d %%</string>
-    <string name="format_nouveau_sms">Nouveau SMS reçu de %1$s. Contenu du sms: %2$s"</string>
-    <string name="format_appel_telephonique">Appel téléphonique de %1$s</string>
-    <string name="compagnon_arrete">Cliquez sur le bouton pour lancer\nCompagnon de route</string>
-    <string name="volume">Volume %1$d</string>
-    <string name="volume_du_systeme">Volume par défaut du système</string>
-    <string name="conseille_pause">Il est %1$s, il est temps de faire une pause</string>
-    <string name="annonce_heure">Il est %1$s</string>
+	<string name="app_name">Road companion</string>
+	<string name="time_announce">It is %1$s</string>
+	<string name="stop">Stop</string>
+	<string name="grant_permissions_button">Grant permissions</string>
+	<string name="clic_button_to_launch">Clic the button to launch Companion</string>
+	<string name="compagnon_notification_title_template">Road companion: %1$s</string>
+	<string name="break_advice">It is %1$s. Time for a break.</string>
+	<string name="start">Start</string>
+	<string name="phone_call_format">Phone call from %1$s.</string>
+	<string name="sms_format">New message from %1$s</string>
+	<string name="lowbattery">Low battery %1$d %%</string>
+	<string name="ask_for_permissions">Road Companion cannot work without you grant some permissions.</string>
+	<string name="missing_permissions">Missing permissions</string>
+	<string name="unknown_contact">unknown contact %1$s</string>
+	<string name="volume">Volume %1$d</string>
+	<string name="default_volume">System default volume</string>
+	<string name="sms_content">Message content:</string>
 </resources>

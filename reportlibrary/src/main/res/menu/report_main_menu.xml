@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:title="Enregistrer historique" android:checkable="true"
+	      android:id="@+id/report_action_enregistrer_historique"/>
+	<item android:title="Enregistrer traces" android:checkable="true"
+	      android:id="@+id/report_action_enregistrer_traces"/>
+</menu>

@@ -11,8 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 
 /**
- * Helper class for showing and canceling compagnon
- * notifications.
+ * Helper class for showing and canceling compagnon notifications.
  * <p>
  * This class makes heavy use of the {@link NotificationCompat.Builder} helper
  * class to create notifications in a backward-compatible way.
@@ -22,6 +21,8 @@ public class CompagnonNotification
 	/**
 	 * The unique identifier for this type of notification.
 	 */
+	@NonNull
+	private static final String CHANNEL_ID = "Compagnon01";
 	@NonNull private static final String NOTIFICATION_TAG = "Compagnon";
 
 	/**
@@ -45,21 +46,22 @@ public class CompagnonNotification
 		builder.setSmallIcon(R.drawable.ic_compagnon);
 		builder.setContentTitle("Compagnon");
 		builder.setContentText(texte);
-		builder.setPriority(Notification.PRIORITY_LOW);
 		builder.setStyle(bigText);
+		builder.setSound(null);
 
 		final NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.O)
 		{
-			String channelId = "Your_channel_id";
-			NotificationChannel channel = new NotificationChannel(channelId, "Compagnon", NotificationManager.IMPORTANCE_HIGH);
+			NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Compagnon", NotificationManager.IMPORTANCE_LOW);
 			channel.setSound(null, null);
-			channel.setImportance(NotificationManager.IMPORTANCE_DEFAULT);
-			nm.createNotificationChannel(channel);
-			builder.setChannelId(channelId);
+			channel.setShowBadge(false);
+			if (nm != null)
+				nm.createNotificationChannel(channel);
+			builder.setChannelId(CHANNEL_ID);
 		}
 
-		nm.notify(NOTIFICATION_TAG, 0, builder.build());
+		if (nm != null)
+			nm.notify(NOTIFICATION_TAG, 0, builder.build());
 	}
 
 
@@ -69,15 +71,16 @@ public class CompagnonNotification
 	 */
 	public static void cancel(final Context context)
 	{
-		final NotificationManager nm = (NotificationManager) context
-				.getSystemService(Context.NOTIFICATION_SERVICE);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR)
+		final NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+		if (nm != null)
 		{
-			nm.cancel(NOTIFICATION_TAG, 0);
-		}
-		else
-		{
-			nm.cancel(NOTIFICATION_TAG.hashCode());
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR)
+			{
+				nm.cancel(NOTIFICATION_TAG, 0);
+			} else
+			{
+				nm.cancel(NOTIFICATION_TAG.hashCode());
+			}
 		}
 	}
 }

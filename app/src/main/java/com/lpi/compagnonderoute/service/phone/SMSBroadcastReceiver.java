@@ -1,4 +1,7 @@
 package com.lpi.compagnonderoute.service.phone;
+/***
+ * Broadcast receiver pour recevoir les nouveaux SMS
+ */
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,9 +11,11 @@ import android.provider.Telephony;
 import android.support.annotation.NonNull;
 import android.telephony.SmsMessage;
 import com.lpi.compagnonderoute.R;
-import com.lpi.compagnonderoute.textToSpeech.TextToSpeechManager;
+import com.lpi.compagnonderoute.textToSpeech.TextToSpeechIntentService;
 import com.lpi.compagnonderoute.utils.Preferences;
 import com.lpi.reportlibrary.Report;
+
+import java.util.ArrayList;
 
 public class SMSBroadcastReceiver extends BroadcastReceiver
 {
@@ -18,6 +23,11 @@ public class SMSBroadcastReceiver extends BroadcastReceiver
     {
     }
 
+    /***
+     * Quelque chose a ete recu
+     * @param context
+     * @param intent
+     */
     @Override
     public void onReceive(@NonNull final Context context, @NonNull final Intent intent)
     {
@@ -27,10 +37,17 @@ public class SMSBroadcastReceiver extends BroadcastReceiver
         {
             Preferences preferences = Preferences.getInstance(context);
             if (!preferences.isEnCours())
+            {
                 // Rien a faire
+                r.log(Report.NIVEAU.WARNING, "SMSBroadcastReceiver activé alors que Compagnon pas en route");
                 return;
+            }
             if ((preferences.getLireSMS() == Preferences.ENTRANT.JAMAIS) && (preferences.getRepondreSMS() == Preferences.ENTRANT.JAMAIS))
+            // On ne demande pas a gerer les SMS, normalement ce broadcastreceiver ne devrait pas etre enregistre
+            {
+                r.log(Report.NIVEAU.WARNING, "SMSBroadcastReceiver activé alors que LireSMS = JAMAIS et repondreSMS = JAMAIS");
                 return;
+            }
 
             Bundle bundle = intent.getExtras();
             if ( bundle!=null)
@@ -40,18 +57,19 @@ public class SMSBroadcastReceiver extends BroadcastReceiver
                 SmsMessage[] smsMessages = Telephony.Sms.Intents.getMessagesFromIntent(intent);
                 for (SmsMessage sms : smsMessages)
                 {
-                    r.log(Report.NIVEAU.DEBUG, "*SMSUtils recu:");
-                    r.log(Report.NIVEAU.DEBUG, "Subscription ID:" + subscriptionId);
-                    r.log(Report.NIVEAU.DEBUG, "Adress:" + sms.getDisplayOriginatingAddress());
-                    r.log(Report.NIVEAU.DEBUG, "DisplayMessageBody " + sms.getDisplayMessageBody());
-                    r.log(Report.NIVEAU.DEBUG, "Email from" + sms.getEmailFrom());
-                    r.log(Report.NIVEAU.DEBUG, "Email body" + sms.getEmailBody());
-                    r.log(Report.NIVEAU.DEBUG, "pseudo subject" + sms.getPseudoSubject());
-                    r.log(Report.NIVEAU.DEBUG, "Service center adress" + sms.getServiceCenterAddress());
-                    r.log(Report.NIVEAU.DEBUG, "Index on Icc" + sms.getIndexOnIcc());
-                    r.log(Report.NIVEAU.DEBUG, "getMessageClass" + sms.getMessageClass());
-                    r.log(Report.NIVEAU.DEBUG, "getStatus" + sms.getStatus());
-                    r.log(Report.NIVEAU.DEBUG, "getStatusOnIcc" + sms.getStatusOnIcc());
+                    r.historique("SMS recu de " + sms.getDisplayOriginatingAddress());
+                    //r.log(Report.NIVEAU.DEBUG, "*SMSUtils recu:");
+                    //r.log(Report.NIVEAU.DEBUG, "Subscription ID:" + subscriptionId);
+                    //r.log(Report.NIVEAU.DEBUG, "Adress:" + sms.getDisplayOriginatingAddress());
+                    //r.log(Report.NIVEAU.DEBUG, "DisplayMessageBody " + sms.getDisplayMessageBody());
+                    //r.log(Report.NIVEAU.DEBUG, "Email from" + sms.getEmailFrom());
+                    //r.log(Report.NIVEAU.DEBUG, "Email body" + sms.getEmailBody());
+                    //r.log(Report.NIVEAU.DEBUG, "pseudo subject" + sms.getPseudoSubject());
+                    //r.log(Report.NIVEAU.DEBUG, "Service center adress" + sms.getServiceCenterAddress());
+                    //r.log(Report.NIVEAU.DEBUG, "Index on Icc" + sms.getIndexOnIcc());
+                    //r.log(Report.NIVEAU.DEBUG, "getMessageClass" + sms.getMessageClass());
+                    //r.log(Report.NIVEAU.DEBUG, "getStatus" + sms.getStatus());
+                    //r.log(Report.NIVEAU.DEBUG, "getStatusOnIcc" + sms.getStatusOnIcc());
 
                     if (preferences.getLireSMS() != Preferences.ENTRANT.JAMAIS)
                         lireSMS(context, sms);
@@ -110,8 +128,11 @@ public class SMSBroadcastReceiver extends BroadcastReceiver
         String body = sms.getDisplayMessageBody();
         if (contact != null && body != null)
         {
-            String message = context.getResources().getString(R.string.format_nouveau_sms, contact, body);
-            TextToSpeechManager.getInstance(context).annonceFromReceiver(context, message);
+            ArrayList<String> message = new ArrayList<>();
+            message.add(context.getResources().getString(R.string.sms_format, contact));
+            message.add(context.getResources().getString(R.string.sms_content));
+            message.add(body);
+            TextToSpeechIntentService.annonce(context, message);
         }
     }
 }

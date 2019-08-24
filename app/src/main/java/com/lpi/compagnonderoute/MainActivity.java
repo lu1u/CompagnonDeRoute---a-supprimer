@@ -1,15 +1,15 @@
 package com.lpi.compagnonderoute;
 
-import android.Manifest;
-import android.app.AlertDialog;
 import android.app.PictureInPictureParams;
-import android.content.*;
-import android.content.pm.PackageManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Rational;
@@ -23,36 +23,23 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import com.lpi.compagnonderoute.plannificateur.Plannificateur;
 import com.lpi.compagnonderoute.service.CompagnonService;
-import com.lpi.compagnonderoute.textToSpeech.TextToSpeechManager;
-import com.lpi.compagnonderoute.utils.DialogAPropos;
-import com.lpi.compagnonderoute.utils.ModalEditText;
-import com.lpi.compagnonderoute.utils.Preferences;
-import com.lpi.compagnonderoute.utils.Utils;
-import com.lpi.reportlibrary.ReportActivity;
+import com.lpi.compagnonderoute.textToSpeech.TextToSpeechIntentService;
+import com.lpi.compagnonderoute.utils.*;
+import com.lpi.reportlibrary.activity.ReportActivity;
 
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
 {
-	@NonNull private static final String[] PERMISSIONS = {
-			Manifest.permission.VIBRATE,
-			Manifest.permission.READ_SMS,
-			Manifest.permission.READ_CONTACTS,
-			Manifest.permission.READ_PHONE_STATE,
-			Manifest.permission.RECEIVE_SMS,
-			Manifest.permission.SEND_SMS,
-			Manifest.permission.BLUETOOTH,
-			Manifest.permission.MODIFY_AUDIO_SETTINGS,
-			Manifest.permission.CALL_PHONE};
+
 
 	private ImageButton btnStart, btnStop;
 	private @Nullable RadioGroup rgAnnonceHeure, rgConseillerPause, rgLireSMS, rgRepondreSMS, rgRepondreAppels, rgAnnoncerAppels;
 	private ImageButton btnReponseSMS, btnReponseAppels;
 	private TextView tvMessage;
 
-	@Nullable
+	@NonNull
 	private Preferences _preferences;
-
 	@NonNull final BroadcastReceiver _receiverProchaineAlarme = new BroadcastReceiver()
 	{
 		@Override
@@ -79,7 +66,7 @@ public class MainActivity extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		Utils.setTheme(this);
+		Utils.setTheme(this);//, R.array.tableauThemes);
 
 		setContentView(R.layout.activity_main);
 		Toolbar toolbar = findViewById(R.id.toolbar);
@@ -94,8 +81,7 @@ public class MainActivity extends AppCompatActivity
 		getControlsFromIds();
 		initListeners();
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-		demandePermissionsSiBesoin();
-
+		Permissions.demandePermissionsSiBesoin(this);
 	}
 
 	@Override
@@ -124,6 +110,9 @@ public class MainActivity extends AppCompatActivity
 	}
 
 
+	/***
+	 * Initialiser les interactions avec les boutons de l'interface
+	 */
 	private void initListeners()
 	{
 		final Preferences preferences = Preferences.getInstance(this);
@@ -131,7 +120,7 @@ public class MainActivity extends AppCompatActivity
 			rgAnnonceHeure.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
 			{
 				@Override
-				public void onCheckedChanged(final RadioGroup group, final int checkedId)
+				public void onCheckedChanged(final RadioGroup group, @IdRes final int checkedId)
 				{
 					switch (checkedId)
 					{
@@ -158,7 +147,7 @@ public class MainActivity extends AppCompatActivity
 			rgConseillerPause.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
 			{
 				@Override
-				public void onCheckedChanged(final RadioGroup group, final int checkedId)
+				public void onCheckedChanged(final RadioGroup group, @IdRes final int checkedId)
 				{
 					switch (checkedId)
 					{
@@ -188,7 +177,7 @@ public class MainActivity extends AppCompatActivity
 			rgLireSMS.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
 			{
 				@Override
-				public void onCheckedChanged(final RadioGroup group, final int checkedId)
+				public void onCheckedChanged(final RadioGroup group, @IdRes final int checkedId)
 				{
 					switch (checkedId)
 					{
@@ -236,7 +225,7 @@ public class MainActivity extends AppCompatActivity
 			rgAnnoncerAppels.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
 			{
 				@Override
-				public void onCheckedChanged(final RadioGroup group, final int checkedId)
+				public void onCheckedChanged(final RadioGroup group, @IdRes final int checkedId)
 				{
 					switch (checkedId)
 					{
@@ -258,7 +247,7 @@ public class MainActivity extends AppCompatActivity
 			rgRepondreAppels.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
 			{
 				@Override
-				public void onCheckedChanged(final RadioGroup group, final int checkedId)
+				public void onCheckedChanged(final RadioGroup group, @IdRes final int checkedId)
 				{
 					switch (checkedId)
 					{
@@ -322,7 +311,6 @@ public class MainActivity extends AppCompatActivity
 	{
 		view.setAnimation(AnimationUtils.loadAnimation(this, R.anim.exit_top));
 		view.setVisibility(View.GONE);
-
 	}
 
 	private void montreBouton(final @NonNull View view)
@@ -358,7 +346,7 @@ public class MainActivity extends AppCompatActivity
 		switch (id)
 		{
 			case R.id.menu_synthese_vocale:
-				TextToSpeechManager.ouvrirConfigurationAndroid(this);
+				TextToSpeechIntentService.ouvrirConfigurationAndroid(this);
 				break;
 
 			case R.id.menu_couleurs:
@@ -383,60 +371,13 @@ public class MainActivity extends AppCompatActivity
 		return true;
 	}
 
-	/*******************************************************************************************************************
-	 * Verifie que toutes les permissions demandées par l'application ont bien ete accordées et fait une demande au
-	 * systeme si besoin
-	 *******************************************************************************************************************/
-	private void demandePermissionsSiBesoin()
-	{
-		if (verifiePermissions())
-			return;
-
-		AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
-		dlgAlert.setMessage("L'application Compagnon de Route ne peut pas fonctionner sans que vous lui accordiez la permission d'accéder à certaines fonctionnalités de votre téléphone.");
-		dlgAlert.setTitle("Permissions manquantes");
-		dlgAlert.setCancelable(false);
-		dlgAlert.setPositiveButton("Ok",
-				new DialogInterface.OnClickListener()
-				{
-					public void onClick(DialogInterface dialog, int which)
-					{
-						//dismiss the dialog
-						ActivityCompat.requestPermissions(MainActivity.this, PERMISSIONS, 0);
-					}
-				});
-
-		dlgAlert.create().show();
-	}
-
-	/*******************************************************************************************************************
-	 * Verifie que toutes les permissions demandées par l'application ont bien ete accordées
-	 * @return false si au moins une permission n'est pas accordee
-	 *******************************************************************************************************************/
-	private boolean verifiePermissions()
-	{
-		for (String p : PERMISSIONS)
-			if (ActivityCompat.checkSelfPermission(this, p) != PackageManager.PERMISSION_GRANTED)
-				return false;
-
-		return true;
-	}
-
-	/*******************************************************************************************************************
-	 * Affiche un message generique
-	 * @param message
-	 *******************************************************************************************************************/
-	private void message(@NonNull final String message)
-	{
-		TextToSpeechManager.getInstance(this).annonce(this, message);
-	}
 
 	/*******************************************************************************************************************
 	 * demarrer les messages de notification
 	 *******************************************************************************************************************/
 	private void demarrerNotifications()
 	{
-		message("Démarrage");
+		TextToSpeechIntentService.annonce(this, R.string.start);
 		Calendar maintenant = Calendar.getInstance();
 		_preferences.setEnCours(true);
 		_preferences.setHeureDernierePause(maintenant.getTimeInMillis());
@@ -450,7 +391,7 @@ public class MainActivity extends AppCompatActivity
 	 *******************************************************************************************************************/
 	private void arreterNotifications()
 	{
-		message("Arrêt");
+		TextToSpeechIntentService.annonce(this, R.string.stop);
 		Plannificateur.getInstance(this).arrete(this);
 		_preferences.setEnCours(false);
 		_preferences.flush(this);
@@ -458,7 +399,7 @@ public class MainActivity extends AppCompatActivity
 		CompagnonService.stop(this);
 
 		if (tvMessage != null)
-			tvMessage.setText(R.string.compagnon_arrete);
+			tvMessage.setText(R.string.clic_button_to_launch);
 	}
 
 
@@ -616,10 +557,16 @@ public class MainActivity extends AppCompatActivity
 	public void onClickStart(View v)
 	{
 		demarrerNotifications();
+		// Montrer bouton stop
 		btnStop.setAnimation(AnimationUtils.loadAnimation(this, R.anim.enter));
 		btnStop.setVisibility(View.VISIBLE);
+		// Cacher bouton start
 		btnStart.setAnimation(AnimationUtils.loadAnimation(this, R.anim.exit));
 		btnStart.setVisibility(View.GONE);
+		//String contact = ContactUtils.getContactFromNumber(this, "+33630531670");
+		//String body = "Salut, est ce que je pourrais passer pour reessayer de claquer un pneu, maintenant que j'ai du savon à pneus" ;
+		//String message = getResources().getString(R.string.format_nouveau_sms, contact, body);
+		//TextToSpeechManager.annonceFromReceiver(this, message);
 	}
 
 	@Override

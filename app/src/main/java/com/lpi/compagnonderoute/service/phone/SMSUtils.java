@@ -7,24 +7,36 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.SmsManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import com.lpi.reportlibrary.Report;
 
 public class SMSUtils
 {
+	/***
+	 * Envoyer un SMS
+	 * @param context
+	 * @param adress    Destinataire
+	 * @param message   Contenu du message
+	 * @param subscriptionId pour le cas d'un telephone DualSIM
+	 */
 	public static void send(@NonNull final Context context, @NonNull final String adress, @NonNull final String message, int subscriptionId)
 	{
+		Report r = Report.getInstance(context);
+		r.log(Report.NIVEAU.DEBUG, "Envoi d'un SMS a " + adress);
+		r.log(Report.NIVEAU.DEBUG, "Contenu: " + message);
 		if (ActivityCompat.checkSelfPermission(context, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED)
 		{
 			try
 			{
 				if (Build.VERSION.SDK_INT >= 22)
 				{
-					SubscriptionManager subscriptionManager = (context).getSystemService(SubscriptionManager.class);
-					SubscriptionInfo subscriptionInfo = subscriptionManager.getActiveSubscriptionInfo(subscriptionId);
 					SmsManager smsManager;
+					SubscriptionManager subscriptionManager = (context).getSystemService(SubscriptionManager.class);
+					@Nullable SubscriptionInfo subscriptionInfo = subscriptionManager.getActiveSubscriptionInfo(subscriptionId);
 					if (subscriptionInfo == null)
 						smsManager = SmsManager.getDefault();
 					else
@@ -39,7 +51,8 @@ public class SMSUtils
 				}
 			} catch (Exception e)
 			{
-				e.printStackTrace();
+				r.log(Report.NIVEAU.ERROR, "Erreur lors de l'envoi d'un SMS");
+				r.log(Report.NIVEAU.ERROR, e);
 			}
 		}
 	}

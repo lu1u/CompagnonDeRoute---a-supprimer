@@ -1,4 +1,4 @@
-package com.lpi.reportlibrary;
+package com.lpi.reportlibrary.database;
 
 import android.content.Context;
 import android.database.Cursor;

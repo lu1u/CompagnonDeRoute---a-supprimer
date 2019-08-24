@@ -1,4 +1,4 @@
-package com.lpi.reportlibrary;
+package com.lpi.reportlibrary.activity;
 
 import android.support.v4.app.Fragment;
 

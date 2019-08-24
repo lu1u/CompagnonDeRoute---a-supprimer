@@ -1,5 +1,5 @@
 /***
- * Classe de gestion de la plannification des alarme
+ * Classe de gestion de la plannification des alarmes
  * Singleton
  */
 package com.lpi.compagnonderoute.plannificateur;
@@ -54,31 +54,6 @@ public class Plannificateur
     }
 
     /***
-     * Programme une alarme Android
-     * @param context
-     * @param prochaineNotification
-     * @param typeNotification
-     */
-    public void plannifie(final @NonNull Context context, @NonNull final Calendar prochaineNotification, final int typeNotification)
-    {
-        Report r = Report.getInstance(context);
-        try
-        {
-            r.log(Report.NIVEAU.DEBUG, "plannification prochaine alarme: " + Carillon.toHourString(context, prochaineNotification));
-            Intent intent = new Intent(context, AlarmReceiver.class);
-            intent.setAction(ACTION_ALARME);
-            intent.putExtra(EXTRA_TYPE_NOTIFICATION, typeNotification);
-            _pendingIntent = PendingIntent.getBroadcast(context, typeNotification, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-            _alarmManager.setExact(AlarmManager.RTC_WAKEUP, prochaineNotification.getTimeInMillis(), _pendingIntent);
-        } catch (Exception e)
-        {
-            r.log(Report.NIVEAU.ERROR, "Plannificateur.plannifie");
-            r.log(Report.NIVEAU.ERROR, e);
-        }
-    }
-
-    /***
      * Calcule la prochaine heure pleine apres celle donnee en parametres
      * @param maintenant
      * @return
@@ -89,7 +64,7 @@ public class Plannificateur
         Calendar res = (Calendar) maintenant.clone();
         res.set(Calendar.SECOND, 0);
         res.set(Calendar.MINUTE, 0);
-        res.roll(Calendar.HOUR_OF_DAY, 1);
+        res.add(Calendar.HOUR_OF_DAY, 1);
         return res;
     }
 
@@ -111,7 +86,7 @@ public class Plannificateur
         {
             // 30 a 60 minute -> prochaine heure
             res.set(Calendar.MINUTE, 0);
-            res.roll(Calendar.HOUR_OF_DAY, 1);
+            res.add(Calendar.HOUR_OF_DAY, 1);
         }
         return res;
     }
@@ -141,11 +116,35 @@ public class Plannificateur
         {
             // 45 a 60 minute -> prochaine heure
             res.set(Calendar.MINUTE, 0);
-            res.roll(Calendar.HOUR_OF_DAY, 1);
+            res.add(Calendar.HOUR_OF_DAY, 1);
         }
 
-        //DEBUG res.roll(Calendar.MINUTE, 1);
         return res;
+    }
+
+    /***
+     * Programme une alarme Android
+     * @param context
+     * @param prochaineNotification
+     * @param typeNotification
+     */
+    public void plannifie(final @NonNull Context context, @NonNull final Calendar prochaineNotification, final int typeNotification)
+    {
+        Report r = Report.getInstance(context);
+        try
+        {
+            r.log(Report.NIVEAU.DEBUG, "plannification prochaine alarme: " + Carillon.toHourString(context, prochaineNotification));
+            Intent intent = new Intent(context, AlarmReceiver.class);
+            intent.setAction(ACTION_ALARME);
+            intent.putExtra(EXTRA_TYPE_NOTIFICATION, typeNotification);
+            _pendingIntent = PendingIntent.getBroadcast(context, typeNotification, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            _alarmManager.setExact(AlarmManager.RTC_WAKEUP, prochaineNotification.getTimeInMillis(), _pendingIntent);
+        } catch (Exception e)
+        {
+            r.log(Report.NIVEAU.ERROR, "Plannificateur.plannifie");
+            r.log(Report.NIVEAU.ERROR, e);
+        }
     }
 
     public void plannifieProchaineNotification(@NonNull final Context context)
@@ -165,33 +164,28 @@ public class Plannificateur
         String message = "";
         String messageUI = "";
 
-        if (preferences.getDelaiAnnonceHeure() != Preferences.ANNONCER_HEURE.JAMAIS)
+        // Prochain carillon
+        prochaineNotification = Carillon.getProchaineNotification(maintenant, preferences);
+        if (prochaineNotification != null)
         {
-            prochaineNotification = Carillon.getProchaineNotification(maintenant, preferences);
-            if (prochaineNotification != null)
-            {
-                typeNotification = Plannificateur.TYPE_NOTIFICATION_CARILLON;
-                message += "Prochain carillon " + Carillon.toHourString(context, prochaineNotification);
-                messageUI += "Prochain carillon " + Carillon.toHourString(context, prochaineNotification) + "\n";
-            }
+            typeNotification = Plannificateur.TYPE_NOTIFICATION_CARILLON;
+            message += "Prochain carillon " + Carillon.toHourString(context, prochaineNotification);
+            messageUI += "Prochain carillon " + Carillon.toHourString(context, prochaineNotification) + "\n";
         }
 
-        if (preferences.isConseillerPause())
+        // Prochaine pause
+        Calendar pause = Pause.getProchaineNotification(maintenant, preferences);
+        if (pause != null)
         {
-            Calendar pause = Pause.getProchaineNotification(maintenant, preferences);
-            if (pause != null)
+            messageUI += "Prochaine pause " + Carillon.toHourString(context, pause);
+
+            if (prochaineNotification == null || pause.before(prochaineNotification))
             {
-                messageUI += "Prochaine pause " + Carillon.toHourString(context, pause) ;
-
-                if (prochaineNotification == null || pause.before(prochaineNotification))
-                {
-                    prochaineNotification = pause;
-                    typeNotification = Plannificateur.TYPE_NOTIFICATION_PAUSE;
-                    if (message.length() > 0)
-                        message += ", ";
-                    message += "Prochaine pause " + Carillon.toHourString(context, prochaineNotification);
-
-                }
+                prochaineNotification = pause;
+                typeNotification = Plannificateur.TYPE_NOTIFICATION_PAUSE;
+                if (message.length() > 0)
+                    message += ", ";
+                message += "Prochaine pause " + Carillon.toHourString(context, prochaineNotification);
             }
         }
 

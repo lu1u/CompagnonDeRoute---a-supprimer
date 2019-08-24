@@ -2,7 +2,7 @@
 // ReportDatabaseHelper pour les traces et historiques
 // Stockage des traces dans une base separee pour ne pas interferer avec le stockage de l'application
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-package com.lpi.reportlibrary;
+package com.lpi.reportlibrary.database;
 
 import android.content.Context;
 import android.database.SQLException;

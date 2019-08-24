@@ -1,4 +1,4 @@
-package com.lpi.reportlibrary;
+package com.lpi.reportlibrary.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,8 +11,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import com.lpi.reportlibrary.R;
+import com.lpi.reportlibrary.Report;
 
 public class ReportActivity extends AppCompatActivity
 {
@@ -80,18 +83,39 @@ public class ReportActivity extends AppCompatActivity
 		return true;
 	}
 
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.report_main_menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu)
+	{
+		super.onPrepareOptionsMenu(menu);
+		menu.findItem(R.id.report_action_enregistrer_historique).setChecked(Report.isGenererHistorique());
+		menu.findItem(R.id.report_action_enregistrer_traces).setChecked(Report.isGenererTraces());
+		return true;
+	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
 		if (item != null)
-			switch (item.getItemId())
-			{
-				case android.R.id.home:
-					this.finish();
-					return true;
-				default:
-			}
-
+		{
+			final int id = item.getItemId();
+			if (id == android.R.id.home)
+				this.finish();
+			else if (id == R.id.report_action_enregistrer_historique)
+				Report.setGenererHistorique(this, !Report.isGenererHistorique());
+			else if (id == R.id.report_action_enregistrer_traces)
+				Report.setGenererTraces(this, !Report.isGenererTraces());
+			else
+				return super.onOptionsItemSelected(item);
+			return true;
+		}
 		return super.onOptionsItemSelected(item);
 	}
 

@@ -1,4 +1,7 @@
 package com.lpi.compagnonderoute.service;
+/***
+ * Service pour recevoir les appels et SMS
+ */
 
 import android.Manifest;
 import android.app.Service;
@@ -11,16 +14,10 @@ import android.provider.Telephony;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.telephony.SubscriptionInfo;
-import android.telephony.SubscriptionManager;
-import android.util.Log;
 import com.lpi.compagnonderoute.service.phone.IncomingCallReceiver;
 import com.lpi.compagnonderoute.service.phone.SMSBroadcastReceiver;
-import com.lpi.compagnonderoute.textToSpeech.TextToSpeechManager;
 import com.lpi.compagnonderoute.utils.Preferences;
 import com.lpi.reportlibrary.Report;
-
-import java.util.List;
 
 public class CompagnonService extends Service
 {
@@ -33,6 +30,10 @@ public class CompagnonService extends Service
 	{
 	}
 
+	/***
+	 * Demarrage du service
+	 * @param context
+	 */
 	public static void start(@NonNull final Context context)
 	{
 		Preferences prefs = Preferences.getInstance(context);
@@ -48,6 +49,10 @@ public class CompagnonService extends Service
 			}
 	}
 
+	/***
+	 * Arreter le service
+	 * @param context
+	 */
 	public static void stop(@NonNull final Context context)
 	{
 		Report r = Report.getInstance(context);
@@ -68,16 +73,15 @@ public class CompagnonService extends Service
 	@Override
 	public int onStartCommand(@NonNull Intent intent, int flags, int startId)
 	{
+		Report r = Report.getInstance(this);
 		try
 		{
 			super.onStartCommand(intent, flags, startId);
 			final String action = intent.getAction();
-			Report r =  Report.getInstance(this);
 			r.log(Report.NIVEAU.DEBUG, "service onCommand " + action);
 
 			if (ACTION_DEMARRAGE.equals(action))
 			{
-
 				// Demarre le service
 				handleActionDemarre();
 				return START_STICKY;
@@ -90,7 +94,6 @@ public class CompagnonService extends Service
 				}
 		} catch (Exception e)
 		{
-			Report r = Report.getInstance(this);
 			r.log(Report.NIVEAU.ERROR, "Erreur dans CompagnonService.onStartCommand");
 			r.log(Report.NIVEAU.ERROR, e);
 		}
@@ -98,11 +101,14 @@ public class CompagnonService extends Service
 		return START_NOT_STICKY;
 	}
 
+	/***
+	 * Gestion de l'arret du service
+	 */
 	private void handleActionStop()
 	{
 		Report.getInstance(this).log(Report.NIVEAU.DEBUG, "handleActionStop");
 
-		// Arreter reception SMSUtils
+		// Arreter reception SMS
 		if ( _smsBroadcastReceiver != null)
 		{
 			unregisterReceiver(_smsBroadcastReceiver);
@@ -122,8 +128,6 @@ public class CompagnonService extends Service
 
 	private void handleActionDemarre()
 	{
-		TextToSpeechManager.getInstance(this);
-
 		Report.getInstance(this).log(Report.NIVEAU.DEBUG, "handleActionDemarre");
 		Preferences prefs = Preferences.getInstance(this);
 		if ((prefs.getLireSMS() != Preferences.ENTRANT.JAMAIS) || (prefs.getRepondreSMS() != Preferences.ENTRANT.JAMAIS))
@@ -136,24 +140,22 @@ public class CompagnonService extends Service
 		{
 			if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED)
 			{
-				SubscriptionManager subManager = (SubscriptionManager) getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);
-				List<SubscriptionInfo> subInfoList = subManager.getActiveSubscriptionInfoList();
-
-				for (int i = 0; i < subInfoList.size(); i++)
-				{
-					int subID = subInfoList.get(i).getSubscriptionId();
-					int simPosition = subInfoList.get(i).getSimSlotIndex();
-
-					if (subManager.isNetworkRoaming(subID))
-						Log.d("TEST", "Simcard in slot " + simPosition + " has subID == " + subID + " and it is in ROAMING");
-					else
-						Log.d("TEST", "Simcard in slot " + simPosition + " has subID == " + subID + " and it is HOME");
-				}
+				//	SubscriptionManager subManager = (SubscriptionManager) getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);
+				//	List<SubscriptionInfo> subInfoList = subManager.getActiveSubscriptionInfoList();
+				//for (int i = 0; i < subInfoList.size(); i++)
+				//{
+				//	int subID = subInfoList.get(i).getSubscriptionId();
+				//	int simPosition = subInfoList.get(i).getSimSlotIndex();
+				//
+				//	if (subManager.isNetworkRoaming(subID))
+				//		Log.d("TEST", "Simcard in slot " + simPosition + " has subID == " + subID + " and it is in ROAMING");
+				//	else
+				//		Log.d("TEST", "Simcard in slot " + simPosition + " has subID == " + subID + " and it is HOME");
+				//}
 
 			_incomingCallReceiver = new IncomingCallReceiver();
 			registerReceiver(_incomingCallReceiver, new IntentFilter(Intent.ACTION_CALL));
 			}
 		}
-
 	}
 }

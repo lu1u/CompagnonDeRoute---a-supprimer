@@ -18,5 +18,6 @@
         <attr name="attrColorBorderToggleOff" format="reference"/>
         <attr name="attrColorBorderToggleOn" format="reference"/>
         <attr name="attrColorTexteRadioBoutons" format="reference"/>
+	    <attr name="attrColorBackground" format="reference"/>
     </declare-styleable>
 </resources>

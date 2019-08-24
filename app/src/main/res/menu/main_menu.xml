@@ -9,5 +9,6 @@
     <item
         android:id="@+id/menu_apropos"
         android:title="A propos..." />
-    <item android:title="Traces" android:id="@+id/menu_traces"/>
+	<item android:title=" "/>
+	<item android:title="Traces (debug)" android:id="@+id/menu_traces"/>
 </menu>

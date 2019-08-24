@@ -3,8 +3,7 @@ package com.lpi.compagnonderoute.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -17,7 +16,7 @@ import com.lpi.compagnonderoute.R;
  */
 public class Utils
 {
-	public static void addHint(final Activity a, int id, final String message)
+	public static void addHint(final Activity a, @IdRes int id, final String message)
 	{
 		View v = a.findViewById(id);
 		if (v == null)
@@ -93,57 +92,51 @@ public class Utils
 		Snackbar.make(v, message, Snackbar.LENGTH_LONG).setAction("Action", null).show();
 	}
 
-	public static void setTheme(Activity a)
+	/***
+	 * Change le theme d'une activity.
+	 * Le theme est decrit dans values/styles.xml de type <array>
+	 * La liste des themes disponibles est stockee dans un int array de values/array.xml
+	 * @param a
+	//	 * @param themesArray : idRes du tableau des themes
+	 */
+	public static void setTheme(@NonNull Activity a)//, @ArrayRes  int themesArray )
 	{
-		Preferences p = Preferences.getInstance(a);
+		a.setTheme(getTheme(a));
+	}
 
-		switch (p.getTheme())
+	public static int getTheme(@NonNull Context context)
+	{
+		switch (Preferences.getInstance(context).getTheme())
 		{
-
 			case 1:
-				a.setTheme(R.style.Theme2);
-				break;
-
+				return R.style.Theme2;
 			case 2:
-				a.setTheme(R.style.Theme3);
-				break;
-
+				return R.style.Theme3;
 			case 3:
-				a.setTheme(R.style.Theme4);
-				break;
-
+				return R.style.Theme4;
 			case 4:
-				a.setTheme(R.style.Theme5);
-				break;
-
+				return R.style.Theme5;
 			case 5:
-				a.setTheme(R.style.Theme6);
-				break;
+				return R.style.Theme6;
 			case 6:
-				a.setTheme(R.style.Theme7);
-				break;
+				return R.style.Theme7;
 			case 7:
-				a.setTheme(R.style.Theme8);
-				break;
-			case 0:
+				return R.style.Theme8;
 			default:
-				a.setTheme(R.style.Theme1);
-				break;
-
+				return R.style.Theme1;
 		}
 	}
 
-	public static Bitmap getBitmap(Context context, int resId)
-	{
-	/*
-}
-	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-		return context.getResources().getDrawable(resId, context.getApplicationContext().getTheme());
-else
-		return context.getResources().getDrawable(resId);      */
-		return BitmapFactory.decodeResource(context.getResources(), resId);
-	}
 
+	/***
+	 * Affiche un message de confirmation
+	 * Appelle une des methodes du ComfirmListener pour donner le resultat
+	 * @param a
+	 * @param titre
+	 * @param message
+	 * @param requestCode
+	 * @param listener
+	 */
 	public static void confirmDialog(@NonNull Activity a, @NonNull String titre, @NonNull String message, final int requestCode, final @NonNull ConfirmListener listener)
 	{
 		new AlertDialog.Builder(a)
@@ -171,6 +164,10 @@ else
 				.show();
 	}
 
+
+	/***
+	 * Listener pour la methode confirmDialog
+	 */
 	public interface ConfirmListener
 	{
 		void onConfirmOK(int requestCode);

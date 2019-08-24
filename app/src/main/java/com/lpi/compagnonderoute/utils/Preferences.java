@@ -13,17 +13,7 @@ public class Preferences
 {
 	private static final String PREFERENCES = Preferences.class.getName();
 
-	public enum ANNONCER_HEURE
-	{
-		JAMAIS, TOUTES_LES_HEURES, TOUTES_LES_DEMI_HEURES, TOUS_LES_QUARTS_D_HEURES
-	}
-
-	public enum ENTRANT
-	{
-		JAMAIS, TOUJOURS, SI_CONTACT
-
-	}
-
+	// Noms des preferences (pour le stockage)
 	@Nullable
 	private static Preferences INSTANCE = null;
 	@NonNull	static private final String PREFS_THEME = "theme"; //$NON-NLS-1$
@@ -45,6 +35,16 @@ public class Preferences
 	@NonNull	static private final String PREFS_REPONSE_APPELS = "reponse appels"; //$NON-NLS-1$
 	@NonNull	static private final String PREFS_ANNONCER_APPELS = "annoncer appels"; //$NON-NLS-1$
 
+	public enum ANNONCER_HEURE
+	{
+		JAMAIS, TOUTES_LES_HEURES, TOUTES_LES_DEMI_HEURES, TOUS_LES_QUARTS_D_HEURES
+	}
+
+	public enum ENTRANT
+	{
+		JAMAIS, TOUJOURS, SI_CONTACT
+
+	}
 	private boolean _dirty;
 	private int _theme = 1;
 	private boolean _enCours = false;

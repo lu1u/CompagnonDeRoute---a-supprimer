@@ -10,7 +10,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.text.format.DateUtils;
 import com.lpi.compagnonderoute.R;
-import com.lpi.compagnonderoute.textToSpeech.TextToSpeechManager;
+import com.lpi.compagnonderoute.textToSpeech.TextToSpeechIntentService;
 import com.lpi.compagnonderoute.utils.Preferences;
 import com.lpi.reportlibrary.Report;
 
@@ -64,7 +64,7 @@ public class AlarmReceiver extends BroadcastReceiver
 		if ( prefs.isConseillerPause())
 		{
 			Calendar maintenant = Calendar.getInstance();
-			TextToSpeechManager.getInstance(context).annonceFromReceiver(context, R.string.conseille_pause,  DateUtils.formatDateTime(context, maintenant.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME));
+			TextToSpeechIntentService.annonce(context, R.string.break_advice, DateUtils.formatDateTime(context, maintenant.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME));
 
 			prefs.setHeureDernierePause(maintenant.getTimeInMillis());
 			prefs.flush(context);
@@ -84,7 +84,7 @@ public class AlarmReceiver extends BroadcastReceiver
 		if ( preferences.isEnCours() && (preferences.getDelaiAnnonceHeure()!= Preferences.ANNONCER_HEURE.JAMAIS))
 		{
 			Calendar maintenant = Calendar.getInstance();
-			TextToSpeechManager.getInstance(context).annonceFromReceiver(context, R.string.annonce_heure, DateUtils.formatDateTime(context, maintenant.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME));
+			TextToSpeechIntentService.annonce(context, R.string.time_announce, DateUtils.formatDateTime(context, maintenant.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME));
 			Plannificateur.getInstance(context).plannifieProchaineNotification(context);
 		}
 	}

@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
 import com.lpi.compagnonderoute.R;
-import com.lpi.compagnonderoute.textToSpeech.TextToSpeechManager;
+import com.lpi.compagnonderoute.textToSpeech.TextToSpeechIntentService;
 import com.lpi.compagnonderoute.utils.Preferences;
 import com.lpi.reportlibrary.Report;
 
@@ -15,8 +15,10 @@ public class IncomingCallReceiver extends BroadcastReceiver
 {
     protected void onIncomingCallStarted(@NonNull final Context context, String number, long subId)
     {
+        if (number == null)
+            return;
         String contact = ContactUtils.getContactFromNumber(context, number);
-
+        Report.getInstance(context).historique("Appel recu de " + number + "," + contact);
         // Annoncer l'appel
         Preferences prefs = Preferences.getInstance(context);
         if (prefs.getAnnoncerAppels() != Preferences.ENTRANT.JAMAIS)
@@ -27,8 +29,8 @@ public class IncomingCallReceiver extends BroadcastReceiver
 
             if (appelant != null)
             {
-                String message = context.getResources().getString(R.string.format_appel_telephonique, appelant);
-                TextToSpeechManager.getInstance(context).annonceFromReceiver(context, message + ", subscription " + subId);
+                String message = context.getResources().getString(R.string.phone_call_format, appelant);
+                TextToSpeechIntentService.annonce(context, message);
             }
         }
 

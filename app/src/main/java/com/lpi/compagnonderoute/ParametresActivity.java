@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
-import com.lpi.compagnonderoute.textToSpeech.TextToSpeechManager;
+import com.lpi.compagnonderoute.textToSpeech.TextToSpeechIntentService;
 import com.lpi.compagnonderoute.utils.Preferences;
 
 public class ParametresActivity extends AppCompatActivity {
@@ -21,6 +21,8 @@ public class ParametresActivity extends AppCompatActivity {
     public static void start(@NonNull final Activity context)
     {
         final AlertDialog dialogBuilder = new AlertDialog.Builder(context).create();
+
+	    //AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context, Utils.getTheme(context));
         LayoutInflater inflater = context.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.activity_parametres, null);
 
@@ -43,7 +45,7 @@ public class ParametresActivity extends AppCompatActivity {
             sbVolume.setVisibility(View.VISIBLE);
         }
 
-        sbVolume.setMax(TextToSpeechManager.getMaxVolume(context));
+	    sbVolume.setMax(TextToSpeechIntentService.getMaxVolume(context));
         sbVolume.setProgress(prefs.getVolume());
 
         swPip.setChecked(prefs.isActiverModePip());
@@ -67,9 +69,9 @@ public class ParametresActivity extends AppCompatActivity {
                 prefs.flush(context);
                 sbVolume.setVisibility(isChecked ? View.INVISIBLE : View.VISIBLE);
                 if ( isChecked )
-                    TextToSpeechManager.getInstance(context).annonce(context, R.string.volume_du_systeme);
+	                TextToSpeechIntentService.annonce(context, R.string.default_volume);
                 else
-                    TextToSpeechManager.getInstance(context).annonce(context, R.string.volume, prefs.getVolume());
+	                TextToSpeechIntentService.annonce(context, R.string.volume, prefs.getVolume());
             }
         });
 
@@ -89,7 +91,7 @@ public class ParametresActivity extends AppCompatActivity {
                                                      {
                                                          prefs.setVolume(progress);
                                                          prefs.flush(context);
-                                                         TextToSpeechManager.getInstance(context).annonce(context, R.string.volume, progress);
+	                                                     TextToSpeechIntentService.annonce(context, R.string.volume, progress);
                                                      }
                                                  }
 

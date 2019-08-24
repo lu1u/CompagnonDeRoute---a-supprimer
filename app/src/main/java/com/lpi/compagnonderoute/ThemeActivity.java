@@ -1,66 +1,54 @@
 package com.lpi.compagnonderoute;
+/***
+ * Affiche une AlertDialog pour choisir un theme de couleurs
+ */
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageButton;
 import com.lpi.compagnonderoute.utils.Preferences;
 
 public class ThemeActivity extends AppCompatActivity
 {
     public static void start(@NonNull final Activity activity)
     {
+	    View dialogView = activity.getLayoutInflater().inflate(R.layout.activity_theme, null);
+
         final AlertDialog dialogBuilder = new AlertDialog.Builder(activity).create();
-        LayoutInflater inflater = activity.getLayoutInflater();
-        @SuppressLint("ResourceType") View dialogView = inflater.inflate(R.layout.activity_theme, null);
+	    addListener(activity, dialogBuilder, dialogView.findViewById(R.id.imageButtonTheme1_1), 0);
+	    addListener(activity, dialogBuilder, dialogView.findViewById(R.id.imageButtonTheme1_2), 0);
 
-        final ImageButton theme1 = dialogView.findViewById(R.id.imageView1) ;
-        final ImageButton theme2 = dialogView.findViewById(R.id.imageView2) ;
-        final ImageButton theme3 = dialogView.findViewById(R.id.imageView3) ;
-        final ImageButton theme4 = dialogView.findViewById(R.id.imageView4) ;
-        final ImageButton theme5 = dialogView.findViewById(R.id.imageView5) ;
-        final ImageButton theme6 = dialogView.findViewById(R.id.imageView6) ;
-        final ImageButton theme7 = dialogView.findViewById(R.id.imageView7);
-        final ImageButton theme8 = dialogView.findViewById(R.id.imageView8);
+	    addListener(activity, dialogBuilder, dialogView.findViewById(R.id.imageButtonTheme2_1), 1);
+	    addListener(activity, dialogBuilder, dialogView.findViewById(R.id.imageButtonTheme2_2), 1);
 
-        Preferences prefs = Preferences.getInstance(activity);
-        switch(prefs.getTheme())
-        {
-            case 1: theme2.setSelected(true); break;
-            case 2: theme3.setSelected(true); break;
-            case 3: theme4.setSelected(true); break;
-            case 4: theme5.setSelected(true); break;
-            case 5: theme6.setSelected(true); break;
-            case 6:
-                theme7.setSelected(true);
-                break;
-            case 7:
-                theme8.setSelected(true);
-                break;
-            default: theme1.setSelected(true); break;
-        }
+	    addListener(activity, dialogBuilder, dialogView.findViewById(R.id.imageButtonTheme3_1), 2);
+	    addListener(activity, dialogBuilder, dialogView.findViewById(R.id.imageButtonTheme3_2), 2);
 
-        addListener(activity, dialogBuilder, theme1, 0) ;
-        addListener(activity, dialogBuilder, theme2, 1) ;
-        addListener(activity, dialogBuilder, theme3, 2) ;
-        addListener(activity, dialogBuilder, theme4, 3) ;
-        addListener(activity, dialogBuilder, theme5, 4) ;
-        addListener(activity, dialogBuilder, theme6, 5) ;
-        addListener(activity, dialogBuilder, theme7, 6);
-        addListener(activity, dialogBuilder, theme8, 7);
+	    addListener(activity, dialogBuilder, dialogView.findViewById(R.id.imageButtonTheme4_1), 3);
+	    addListener(activity, dialogBuilder, dialogView.findViewById(R.id.imageButtonTheme4_2), 3);
+
+	    addListener(activity, dialogBuilder, dialogView.findViewById(R.id.imageButtonTheme5_1), 4);
+	    addListener(activity, dialogBuilder, dialogView.findViewById(R.id.imageButtonTheme5_2), 4);
+
+	    addListener(activity, dialogBuilder, dialogView.findViewById(R.id.imageButtonTheme6_1), 5);
+	    addListener(activity, dialogBuilder, dialogView.findViewById(R.id.imageButtonTheme6_2), 5);
+
+	    addListener(activity, dialogBuilder, dialogView.findViewById(R.id.imageButtonTheme7_1), 6);
+	    addListener(activity, dialogBuilder, dialogView.findViewById(R.id.imageButtonTheme7_2), 6);
+
+	    addListener(activity, dialogBuilder, dialogView.findViewById(R.id.imageButtonTheme8_1), 7);
+	    addListener(activity, dialogBuilder, dialogView.findViewById(R.id.imageButtonTheme8_2), 7);
 
         dialogBuilder.setView(dialogView);
         dialogBuilder.show();
     }
 
 
-    private static void addListener(@NonNull final Activity activity, @NonNull final AlertDialog dialogBuilder, @NonNull final ImageButton button, final int theme)
+	private static void addListener(@NonNull final Activity activity, @NonNull final AlertDialog dialogBuilder, @NonNull final View button, final int theme)
     {
         button.setOnClickListener(new View.OnClickListener()
                                   {

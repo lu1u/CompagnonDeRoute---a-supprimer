@@ -1,4 +1,4 @@
-package com.lpi.reportlibrary;
+package com.lpi.reportlibrary.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,6 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import com.lpi.reportlibrary.R;
+import com.lpi.reportlibrary.database.HistoriqueAdapter;
+import com.lpi.reportlibrary.database.HistoriqueDatabase;
 
 public class HistoriqueFragment extends ReportFragment
 {

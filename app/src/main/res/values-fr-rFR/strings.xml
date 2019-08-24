@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Compagnon de route</string>
+	<string name="compagnon_notification_title_template">Compagnon de route: %1$s</string>
+	<string name="unknown_contact">contact inconnu %1$s</string>
+	<string name="lowbattery">Batterie faible %1$d %%</string>
+	<string name="sms_format">Nouveau SMS reçu de %1$s</string>
+	<string name="phone_call_format">Appel téléphonique de %1$s</string>
+	<string name="clic_button_to_launch">Cliquez sur le bouton pour lancer\nCompagnon de route</string>
+	<string name="volume">Volume %1$d</string>
+	<string name="default_volume">Volume par défaut du système</string>
+	<string name="break_advice">Il est %1$s. Il est temps de faire une pause</string>
+	<string name="time_announce">Il est %1$s</string>
+	<string name="ask_for_permissions">L\'application Compagnon de Route ne peut pas fonctionner sans que vous lui
+		accordiez la permission d\'accéder à certaines fonctionnalités de votre téléphone:\n- recevoir les appels
+		téléphoniques\n-accéder à vos contacts\n- envoyer des SMS
+	</string>
+	<string name="missing_permissions">Permissions manquantes</string>
+	<string name="grant_permissions_button">Accorder les permissions</string>
+	<string name="start">Démarrage</string>
+	<string name="stop">Arrêt</string>
+	<string name="sms_content">Contenu du message:</string>
+</resources>

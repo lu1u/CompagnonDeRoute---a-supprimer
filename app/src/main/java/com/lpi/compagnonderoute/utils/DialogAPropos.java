@@ -24,24 +24,6 @@ public class DialogAPropos
 
 		TextView tv = dialogView.findViewById(R.id.textViewDescription);
 		tv.setText(message);
-//		final EditText editText = dialogView.findViewById(idEdit);
-//		final Button button1 = dialogView.findViewById(idSubmit);
-//		final TextView tvTitre = dialogView.findViewById(idTitre);
-//		tvTitre.setText(titre);
-
-//		if (valeur != null)
-//			editText.setText(valeur);
-//		button1.setOnClickListener(new View.OnClickListener()
-//		{
-//			@Override
-//			public void onClick(View view)
-//			{
-//				listener.onTextEdited(editText.getText().toString());
-//				dialogBuilder.dismiss();
-//				activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-//			}
-//		});
-
 		dialogBuilder.setView(dialogView);
 		dialogBuilder.show();
 	}

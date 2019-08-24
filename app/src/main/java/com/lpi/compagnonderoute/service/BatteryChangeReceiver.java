@@ -1,4 +1,7 @@
 package com.lpi.compagnonderoute.service;
+/***
+ * Broadcast receiver pour surveiller l'etat de la batterie
+ */
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
